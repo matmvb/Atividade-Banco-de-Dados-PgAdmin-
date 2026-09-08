@@ -27,7 +27,7 @@ WHERE id_pagamento = 8;
 -- 5) Cancela a matrícula da Valentina (matrícula 8)
 --    (utilizada no script 019__ para demonstrar o DELETE)
 UPDATE matriculas
-SET status = 'CANCELADA'
+SET status = 'CANCELADA', data_cancelamento = CURRENT_DATE
 WHERE id_matricula = 8;
 
 -- 6) Altera a mensalidade padrão das matrículas ativas da turma da manhã

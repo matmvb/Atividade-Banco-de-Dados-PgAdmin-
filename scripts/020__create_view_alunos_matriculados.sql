@@ -19,7 +19,10 @@ SELECT
     u.cidade,
     u.estado,
     c.nome_curso,
-    p.nome_completo                    AS nome_professor
+    p.nome_completo                    AS nome_professor,
+    m.valor_mensalidade,
+    m.desconto,
+    (m.valor_mensalidade - m.desconto) AS valor_final
 FROM pessoas a
 JOIN matriculas m    ON m.id_aluno  = a.id_pessoa
 JOIN turmas t        ON t.id_turma  = m.id_turma

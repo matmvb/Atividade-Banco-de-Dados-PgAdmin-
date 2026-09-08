@@ -4,11 +4,11 @@
 -- que compõem a formação.
 -- ============================================================
 
-INSERT INTO cursos (id_curso, nome_curso, descricao, duracao_meses, carga_horaria_total)
+INSERT INTO cursos (id_curso, nome_curso, descricao, modalidade, carga_horaria_total, duracao_meses, faixa_etaria, tipo_curso, valor_mensalidade)
 VALUES (1, 'Formação Megamente',
         'Formação completa em tecnologia e robótica (STEAM): programação, '
         'desenvolvimento de games, robótica e criação de apps.',
-        12, 310)
+        'Presencial', 310, 12, '6 a 17 anos', 'Formação Completa', 350.00)
 ON CONFLICT (id_curso) DO NOTHING;
 
 INSERT INTO materias (id_materia, id_curso, nome_materia, carga_horaria, ordem)

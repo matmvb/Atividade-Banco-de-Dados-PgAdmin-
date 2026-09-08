@@ -8,12 +8,12 @@ Banco de dados relacional desenvolvido com **PostgreSQL** para a gestão acadêm
 Sistema de banco de dados para uma **escola de tecnologia e robótica para crianças e adolescentes**, utilizando metodologia STEAM (programação, desenvolvimento de games, robótica e criação de apps).
 
 ### Objetivo Geral
-Centralizar em um único modelo relacional todas as informações do dia a dia da escola: cadastro de unidades, pessoas (alunos, responsáveis, professores e funcionários), o curso único com suas matérias, turmas, matrículas, controle de presença e pagamentos de mensalidades. O objetivo é dar suporte completo à **equipe pedagógica** (matrículas, turmas e frequência) e à **administração financeira** (mensalidades e status de pagamento).
+Centralizar em um único modelo relacional todas as informações do dia a dia da escola: cadastro de unidades e pessoas (alunos, responsáveis, professores e funcionários), o curso único com suas matérias, turmas, matrículas, controle de presença e pagamentos de mensalidades. O objetivo é dar suporte completo à **equipe pedagógica** (matrículas, turmas, matérias e frequência) e à **administração financeira** (mensalidades, descontos e status de pagamento).
 
 ### Público-Alvo
 - **Equipe pedagógica**: professores e coordenadores, que controlam turmas, matérias e presença dos alunos.
 - **Secretaria / administração**: responsáveis pelo cadastro de alunos e responsáveis, matrículas, turmas e funcionários.
-- **Setor financeiro**: acompanhamento e baixa dos pagamentos de mensalidades por parte dos responsáveis.
+- **Setor financeiro**: acompanhamento, descontos e baixa dos pagamentos de mensalidades.
 - **Responsáveis (pais/guardians)**: único responsável legal e financeiro por aluno, conforme contrato.
 
 ### Contexto Real da Escola
@@ -24,7 +24,7 @@ A escola possui **mais de uma unidade espalhada pelo Brasil**. Este projeto mode
 ## Estrutura do Repositório
 
 ```
-escola-megamente-porto-velho/
+Atividade Banco de Dados (PgAdmin)/
 ├── README.md
 └── scripts/
     ├── 001__create_database_escola_megamente.sql
@@ -78,26 +78,16 @@ erDiagram
         int qtde_salas
     }
 
-    PESSOAS {
-        serial id_pessoa PK
-        varchar nome_completo
-        char cpf
-        date data_nascimento
-        varchar email
-        varchar telefone
-        varchar tipo_pessoa
-        varchar cargo
-        int id_unidade FK
-        int id_responsavel FK
-        date data_ingresso
-    }
-
     CURSOS {
         serial id_curso PK
         varchar nome_curso
         text descricao
-        int duracao_meses
+        varchar modalidade
         int carga_horaria_total
+        int duracao_meses
+        varchar faixa_etaria
+        varchar tipo_curso
+        numeric valor_mensalidade
     }
 
     MATERIAS {
@@ -108,15 +98,39 @@ erDiagram
         int ordem
     }
 
+    PESSOAS {
+        serial id_pessoa PK
+        varchar nome_completo
+        char cpf UK
+        varchar rg
+        date data_nascimento
+        varchar email
+        varchar telefone
+        varchar telefone_alternativo
+        varchar endereco
+        varchar tipo_pessoa
+        varchar cargo
+        numeric salario
+        int id_unidade FK
+        int id_responsavel FK
+        date data_ingresso
+        varchar status
+    }
+
     TURMAS {
         serial id_turma PK
         int id_curso FK
         int id_unidade FK
         int id_professor FK
         varchar nome_turma
+        varchar codigo UK
         varchar turno
         time horario_inicio
         time horario_fim
+        varchar sala
+        int vagas
+        date data_inicio
+        date data_fim
     }
 
     TURMA_MATERIAS {
@@ -129,9 +143,13 @@ erDiagram
         serial id_matricula PK
         int id_aluno FK
         int id_turma FK
+        int id_funcionario FK
         date data_matricula
         varchar status
         numeric valor_mensalidade
+        numeric desconto
+        date data_cancelamento
+        text obs
     }
 
     PRESENCAS {
@@ -154,13 +172,13 @@ erDiagram
 
     UNIDADES ||--o{ PESSOAS : "emprega / atende"
     UNIDADES ||--o{ TURMAS : "abriga"
-    PESSOAS ||--o{ PESSOAS : "responsável pelo aluno"
-    PESSOAS ||--o{ TURMAS : "professor ministra"
     CURSOS ||--o{ MATERIAS : "composto por"
     CURSOS ||--o{ TURMAS : "gera turmas"
+    MATERIAS ||--o{ TURMA_MATERIAS : "ministrada em"
     TURMAS ||--o{ TURMA_MATERIAS : "percorre"
-    MATERIAS ||--o{ TURMA_MATERIAS : "é ministrada em"
-    PESSOAS ||--o{ MATRICULAS : "aluno realiza"
+    PESSOAS ||--o{ PESSOAS : "responsável pelo aluno"
+    PESSOAS ||--o{ TURMAS : "professor leciona"
+    PESSOAS ||--o{ MATRICULAS : "aluno e funcionário"
     TURMAS ||--o{ MATRICULAS : "recebe matrículas"
     MATRICULAS ||--o{ PRESENCAS : "registra frequência"
     MATERIAS ||--o{ PRESENCAS : "referência"
@@ -169,11 +187,13 @@ erDiagram
 ```
 
 ### Decisões de modelagem
-- **1 curso único** ("Formação Megamente") com **8 matérias**, percorridas integralmente por todas as turmas (tabela associativa `turma_materias`).
-- **1 professor** vinculado a todas as turmas; **funcionários e professores** estão na mesma tabela `pessoas`, diferenciados por `tipo_pessoa`/`cargo`.
+- **1 curso único** ("Formação Megamente") com **8 matérias**, percorridas integralmente por todas as turmas (tabela associativa `turma_materias`). O curso guarda característica comercial (`modalidade`, `faixa_etaria`, `tipo_curso` e `valor_mensalidade`).
+- **Pessoas em tabela única** (`pessoas`) para alunos, responsáveis, professores e funcionários — diferenciados por `tipo_pessoa`, `cargo` e `salario` (apenas para a equipe). Assim não há repetição de cadastro (nome/CPF/contato) entre tabelas.
+- **1 professor** vinculado a todas as turmas; a turma guarda `codigo`, `turno`, `sala`, `vagas` e período (`data_inicio`/`data_fim`).
 - **1 responsável por aluno** (responsável legal e financeiro do contrato), modelado como auto-relacionamento em `pessoas.id_responsavel`.
+- **Matrícula** registra quem a realizou (`id_funcionario`), o valor da mensalidade, possíveis `desconto`, `data_cancelamento` e observações. O valor final é `valor_mensalidade - desconto`.
 - Cada unidade possui **1 sala** (`qtde_salas = 1`); em Porto Velho existem **3 turmas** (manhã, tarde e noite) dividindo a única sala.
-- Controle de **matrículas, presença e pagamentos de mensalidade**. O modelo suporta múltiplas unidades no Brasil.
+- Controle de **presença** e **pagamentos de mensalidade**. O modelo suporta múltiplas unidades no Brasil.
 
 ---
 

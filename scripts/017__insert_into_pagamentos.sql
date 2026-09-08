@@ -13,9 +13,9 @@ VALUES
     -- Matrícula 2 (Sofia / resp 2)
     (4,  2,  2, '2026-07-05', '2026-07-06', 350.00, 'PAGO'),
     (5,  2,  2, '2026-08-05', '2026-08-05', 350.00, 'PAGO'),
-    -- Matrícula 3 (Arthur / resp 3)
-    (6,  3,  3, '2026-07-05', '2026-07-02', 350.00, 'PAGO'),
-    (7,  3,  3, '2026-08-05', NULL,         350.00, 'PENDENTE'),
+    -- Matrícula 3 (Arthur / resp 3) - com desconto de irmão (R$ 50,00)
+    (6,  3,  3, '2026-07-05', '2026-07-02', 300.00, 'PAGO'),
+    (7,  3,  3, '2026-08-05', NULL,         300.00, 'PENDENTE'),
     -- Matrícula 4 (Laura / resp 4) - atrasada
     (8,  4,  4, '2026-08-05', NULL,         350.00, 'ATRASADO'),
     -- Matrícula 5 (Gabriel / resp 5)
