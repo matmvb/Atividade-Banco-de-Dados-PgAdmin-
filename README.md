@@ -2,7 +2,24 @@
 
 Trabalho da disciplina de banco de dados feito com **PostgreSQL** + **PgAdmin**.
 
-O tema que escolhemos foi a **Escola Megamente**, uma escola de programação,
+## Identificação do grupo
+
+- **Grupo:** G2-04
+- **Banco de dados:** db18
+- **Usuário de acesso:** aluno18
+- **Host de conexão:** core_pgafya
+
+### Integrantes
+
+- MATHEUS DE VASCONCELLOS BARBOSA
+- NICOLAS DE LAIA FERREIRA FONSECA
+- JOÃO PEDRO MENDES DE QUEIROZ
+- LUCAS FELIPE
+- NICOLAS MOURA
+
+---
+
+O tema que escolhi foi a **Escola Megamente**, uma escola de programação,
 robótica e games para crianças e adolescentes, que trabalha a metodologia
 STEAM. Modelei a unidade de **Porto Velho/RO**.
 
