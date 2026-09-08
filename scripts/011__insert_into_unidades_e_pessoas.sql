@@ -1,9 +1,7 @@
--- ============================================================
--- 011__insert_into_unidades_e_pessoas.sql
--- Cadastra a unidade de Porto Velho e as pessoas: responsáveis
--- (1 a 8), professor (9), funcionários (10 a 12) e alunos
--- (13 a 20). Cada aluno possui exatamente 1 responsável.
--- ============================================================
+-- cadastro da unidade de porto velho e das pessoas.
+-- ids 1 a 8 = responsáveis; 9 = professor; 10 a 12 = funcionários;
+-- 13 a 20 = alunos (cada um com o seu responsável).
+-- os cpfs e endereços são todos fictícios.
 
 -- Unidade
 INSERT INTO unidades (id_unidade, nome, cidade, estado, endereco, telefone, qtde_salas)

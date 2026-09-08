@@ -1,70 +1,55 @@
-# Escola Megamente - Unidade Porto Velho
+# Escola Megamente - Banco de Dados (Unidade Porto Velho)
 
-Banco de dados relacional desenvolvido com **PostgreSQL** para a gestão acadêmica, operacional e financeira da **Escola Megamente (Unidade Porto Velho)**.
+Trabalho da disciplina de banco de dados feito com **PostgreSQL** + **PgAdmin**.
 
-## Apresentação do Projeto
+O tema que escolhi foi a **Escola Megamente**, uma escola de programação,
+robótica e games para crianças e adolescentes, que trabalha a metodologia
+STEAM. Modelei a unidade de **Porto Velho/RO**.
 
-### Tema
-Sistema de banco de dados para uma **escola de tecnologia e robótica para crianças e adolescentes**, utilizando metodologia STEAM (programação, desenvolvimento de games, robótica e criação de apps).
+## Apresentação
 
-### Objetivo Geral
-Centralizar em um único modelo relacional todas as informações do dia a dia da escola: cadastro de unidades e pessoas (alunos, responsáveis, professores e funcionários), o curso único com suas matérias, turmas, matrículas, controle de presença e pagamentos de mensalidades. O objetivo é dar suporte completo à **equipe pedagógica** (matrículas, turmas, matérias e frequência) e à **administração financeira** (mensalidades, descontos e status de pagamento).
+A escola tem mais de uma unidade espalhada pelo Brasil, então comecei criando
+uma tabela de unidades — dá pra cadastrar outras unidades depois sem mexer no
+resto.
 
-### Público-Alvo
-- **Equipe pedagógica**: professores e coordenadores, que controlam turmas, matérias e presença dos alunos.
-- **Secretaria / administração**: responsáveis pelo cadastro de alunos e responsáveis, matrículas, turmas e funcionários.
-- **Setor financeiro**: acompanhamento, descontos e baixa dos pagamentos de mensalidades.
-- **Responsáveis (pais/guardians)**: único responsável legal e financeiro por aluno, conforme contrato.
+Na unidade de Porto Velho tem **1 sala de aula só**, **1 professor** e **3
+turmas** (manhã, tarde e noite) que se revezam na sala. O curso é único: a
+**Formação Megamente**, com **8 matérias**. As turmas passam por todas as
+matérias durante o curso. As aulas são presenciais.
 
-### Contexto Real da Escola
-A escola possui **mais de uma unidade espalhada pelo Brasil**. Este projeto modela a unidade de **Porto Velho/RO**, que conta com **1 sala de aula**, **1 professor** responsável pelo curso completo e **3 turmas** (manhã, tarde e noite). O curso é único — **Formação Megamente** — e é composto por **8 matérias** que a turma percorre integralmente. As aulas são **presenciais**.
+### Objetivo
 
----
+Organizar num banco só as coisas do dia a dia da escola:
 
-## Estrutura do Repositório
+- cadastro de alunos, responsáveis, professor e funcionários;
+- turmas e as matérias do curso;
+- matrículas (com valor e desconto);
+- presença das aulas;
+- pagamentos das mensalidades (quem paga é o responsável).
 
-```
-Atividade Banco de Dados (PgAdmin)/
-├── README.md
-└── scripts/
-    ├── 001__create_database_escola_megamente.sql
-    ├── 002__create_table_unidades.sql
-    ├── 003__create_table_pessoas.sql
-    ├── 004__create_table_cursos.sql
-    ├── 005__create_table_materias.sql
-    ├── 006__create_table_turmas.sql
-    ├── 007__create_table_turma_materias.sql
-    ├── 008__create_table_matriculas.sql
-    ├── 009__create_table_presencas.sql
-    ├── 010__create_table_pagamentos.sql
-    ├── 011__insert_into_unidades_e_pessoas.sql
-    ├── 012__insert_into_cursos_e_materias.sql
-    ├── 013__insert_into_turmas.sql
-    ├── 014__insert_into_turma_materias.sql
-    ├── 015__insert_into_matriculas.sql
-    ├── 016__insert_into_presencas.sql
-    ├── 017__insert_into_pagamentos.sql
-    ├── 018__update_dados_exemplo.sql
-    ├── 019__delete_dados_exemplo.sql
-    ├── 020__create_view_alunos_matriculados.sql
-    ├── 021__create_view_pagamentos_pendentes.sql
-    └── 022__create_or_replace_procedure_atualiza_status_pagamentos.sql
-```
+Assim a secretaria e o financeiro não dependem mais de planilha.
 
-### Regra de nomes
-Todos os scripts seguem o padrão `[Versão]__[acao]_[descricao/objeto].sql`:
+### Público-alvo
 
-- `001__` a `010__` → DDL: criação do banco e das tabelas (`CREATE TABLE IF NOT EXISTS`)
-- `011__` a `017__` → DML: inserção de dados de exemplo (`INSERT ... ON CONFLICT DO NOTHING`)
-- `018__` e `019__` → DML: `UPDATE` e `DELETE` para validar o comportamento do banco
-- `020__` e `021__` → `CREATE OR REPLACE VIEW`
-- `022__` → `CREATE OR REPLACE PROCEDURE`
+- **Secretaria** — cadastro de alunos, responsáveis, turmas e matrículas;
+- **Professor** — lançar a presença das aulas;
+- **Financeiro** — ver quem está devendo mensalidade;
+- **Direção** — acompanhar quantos alunos tem em cada turma.
 
-> **Dica:** todos os scripts podem ser executados múltiplas vezes sem erro (uso de `IF NOT EXISTS` e `ON CONFLICT DO NOTHING`).
+## Como eu modelei
 
----
+- juntei aluno, responsável, professor e funcionário numa tabela **pessoas**
+  só, pra não repetir nome/cpf/telefone em quatro tabelas parecidas;
+- cada aluno tem **1 responsável** (é quem assina o contrato e paga a
+  mensalidade) — apontado pelo campo `id_responsavel`;
+- a **turma** pertence a uma unidade e a um curso, e tem o professor;
+- a turma liga com as **8 matérias** pela tabela `turma_materias`;
+- a **matrícula** guarda o valor e um possível desconto (ex.: desconto de
+  irmão);
+- a **presença** é registrada por matrícula + matéria + data da aula;
+- o **pagamento** é da matrícula e quem paga é o responsável.
 
-## Modelo de Dados Relacional
+### Modelo de dados (diagrama)
 
 ```mermaid
 erDiagram
@@ -186,45 +171,63 @@ erDiagram
     PESSOAS ||--o{ PAGAMENTOS : "responsável paga"
 ```
 
-### Decisões de modelagem
-- **1 curso único** ("Formação Megamente") com **8 matérias**, percorridas integralmente por todas as turmas (tabela associativa `turma_materias`). O curso guarda característica comercial (`modalidade`, `faixa_etaria`, `tipo_curso` e `valor_mensalidade`).
-- **Pessoas em tabela única** (`pessoas`) para alunos, responsáveis, professores e funcionários — diferenciados por `tipo_pessoa`, `cargo` e `salario` (apenas para a equipe). Assim não há repetição de cadastro (nome/CPF/contato) entre tabelas.
-- **1 professor** vinculado a todas as turmas; a turma guarda `codigo`, `turno`, `sala`, `vagas` e período (`data_inicio`/`data_fim`).
-- **1 responsável por aluno** (responsável legal e financeiro do contrato), modelado como auto-relacionamento em `pessoas.id_responsavel`.
-- **Matrícula** registra quem a realizou (`id_funcionario`), o valor da mensalidade, possíveis `desconto`, `data_cancelamento` e observações. O valor final é `valor_mensalidade - desconto`.
-- Cada unidade possui **1 sala** (`qtde_salas = 1`); em Porto Velho existem **3 turmas** (manhã, tarde e noite) dividindo a única sala.
-- Controle de **presença** e **pagamentos de mensalidade**. O modelo suporta múltiplas unidades no Brasil.
+## Estrutura dos arquivos
 
----
+```
+├── README.md
+└── scripts/
+    ├── 001__create_database_escola_megamente.sql   (guia de criação do banco)
+    ├── 002__create_table_unidades.sql              (criação das tabelas - DDL)
+    ├── 003__create_table_pessoas.sql
+    ├── 004__create_table_cursos.sql
+    ├── 005__create_table_materias.sql
+    ├── 006__create_table_turmas.sql
+    ├── 007__create_table_turma_materias.sql
+    ├── 008__create_table_matriculas.sql
+    ├── 009__create_table_presencas.sql
+    ├── 010__create_table_pagamentos.sql
+    ├── 011__insert_into_unidades_e_pessoas.sql     (dados de exemplo - DML)
+    ├── 012__insert_into_cursos_e_materias.sql
+    ├── 013__insert_into_turmas.sql
+    ├── 014__insert_into_turma_materias.sql
+    ├── 015__insert_into_matriculas.sql
+    ├── 016__insert_into_presencas.sql
+    ├── 017__insert_into_pagamentos.sql
+    ├── 018__update_dados_exemplo.sql               (teste do UPDATE)
+    ├── 019__delete_dados_exemplo.sql               (teste do DELETE)
+    ├── 020__create_view_alunos_matriculados.sql    (views)
+    ├── 021__create_view_pagamentos_pendentes.sql
+    └── 022__create_or_replace_procedure_atualiza_status_pagamentos.sql
+```
 
-## Como Executar no pgAdmin
+## Como rodar no PgAdmin
 
-1. Abra o **pgAdmin** e conecte-se ao servidor PostgreSQL.
-2. Crie o banco `escola_megamente` (botão direito em *Databases* → *Create* → *Database...*).
-3. Abra o **Query Tool** (botão direito no banco `escola_megamente` → *Query Tool*).
-4. Abra e execute os scripts **em ordem numérica** (001 → 022), dentro da pasta `scripts/`:
-
-| Ordem | Script | Ação |
-|---|---|---|
-| `001` | `create_database_escola_megamente.sql` | Guia de criação do banco (ou crie via GUI) |
-| `002`–`010` | `create_table_*.sql` | Criação das 9 tabelas (DDL) |
-| `011`–`017` | `insert_into_*.sql` | Dados de exemplo (DML – INSERT) |
-| `018` | `update_dados_exemplo.sql` | Validação de UPDATE |
-| `019` | `delete_dados_exemplo.sql` | Validação de DELETE e chaves estrangeiras |
-| `020`–`021` | `create_view_*.sql` | Views: alunos matriculados e pagamentos pendentes |
-| `022` | `create_or_replace_procedure_*.sql` | Procedure de atualização de status |
-
-5. Execute a procedure criada para marcar mensalidades vencidas como atrasadas:
+1. Cria o banco `escola_megamente` (botão direito em *Databases* → *Create* →
+   *Database...*), ou pelo script `001`.
+2. Abre o *Query Tool* e executa os scripts **em ordem numérica** (001 → 022).
+   Os números já estão na ordem certa das dependências (tabela antes de dados).
+3. Depois dá pra testar isso aí:
 
 ```sql
+-- ver os alunos que estão matriculados (com turma e responsável)
+SELECT * FROM view_alunos_matriculados;
+
+-- ver quem tá devendo mensalidade
+SELECT * FROM view_pagamentos_pendentes;
+
+-- marcar como atrasado o que venceu e não foi pago
 CALL proc_atualiza_status_pagamentos();
 ```
 
-6. Consulte as views:
+Dá pra rodar os scripts mais de uma vez sem erro: as tabelas usam
+`CREATE TABLE IF NOT EXISTS` e os inserts usam `ON CONFLICT DO NOTHING`.
 
-```sql
-SELECT * FROM view_alunos_matriculados;
-SELECT * FROM view_pagamentos_pendentes;
-```
+## Anotações / o que eu aprendi
 
-> **Dica:** os scripts DDL usam `CREATE TABLE IF NOT EXISTS` e os DML usam `ON CONFLICT DO NOTHING`, permitindo executá-los múltiplas vezes sem erro.
+- o `CREATE DATABASE` do Postgres **não tem** `IF NOT EXISTS`, por isso o
+  script `001` é mais um guia do que um script de fato;
+- se tentar apagar um responsável que tem aluno apontando pra ele, o banco
+  recusa (chave estrangeira) — deixei um exemplo disso comentado no `019`;
+- coloquei `salario` na tabela de pessoas, mas ele só é preenchido pra
+  professor e funcionários (restrição `CHECK`);
+- os CPFs, e-mails e endereços dos dados de exemplo são **fictícios**.

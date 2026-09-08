@@ -1,8 +1,5 @@
--- ============================================================
--- 012__insert_into_cursos_e_materias.sql
--- Cadastra o curso único "Formação Megamente" e as 8 matérias
--- que compõem a formação.
--- ============================================================
+-- o curso e as 8 matérias. valores de carga horária e mensalidade são
+-- fictícios, a escola pode ajustar depois.
 
 INSERT INTO cursos (id_curso, nome_curso, descricao, modalidade, carga_horaria_total, duracao_meses, faixa_etaria, tipo_curso, valor_mensalidade)
 VALUES (1, 'Formação Megamente',

@@ -1,10 +1,6 @@
--- ============================================================
--- 010__create_table_pagamentos.sql
--- Mensalidades pagas pelos responsáveis. Cada pagamento está
--- vinculado a uma matrícula e ao responsável financeiro do aluno
--- (1 responsável por aluno). O status pode ser PENDENTE, PAGO
--- ou ATRASADO (mantido pela procedure do script 022).
--- ============================================================
+-- pagamentos da mensalidade. quem paga é o responsável do aluno (1 por aluno).
+-- o status começa como PENDENTE e a procedure do script 022 marca como
+-- ATRASADO quando passa da data de vencimento sem pagar.
 CREATE TABLE IF NOT EXISTS pagamentos (
     id_pagamento    SERIAL PRIMARY KEY,
     id_matricula    INTEGER NOT NULL REFERENCES matriculas(id_matricula),

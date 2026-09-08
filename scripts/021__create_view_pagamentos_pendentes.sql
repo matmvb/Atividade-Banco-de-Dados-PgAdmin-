@@ -1,8 +1,6 @@
--- ============================================================
--- 021__create_view_pagamentos_pendentes.sql
--- View que lista as mensalidades ainda não pagas (PENDENTE ou
--- ATRASADO), mostrando aluno, responsável e valor em aberto.
--- ============================================================
+-- essa view eu criei pensando em quem cobra: mostra as mensalidades em aberto
+-- (pendentes e atrasadas) com o nome do aluno e de quem paga (o responsável),
+-- e ainda avisa se já venceu.
 CREATE OR REPLACE VIEW view_pagamentos_pendentes AS
 SELECT
     pg.id_pagamento,

@@ -1,10 +1,6 @@
--- ============================================================
--- 006__create_table_turmas.sql
--- Turmas da unidade. Em Porto Velho existem 3 turmas
--- (manhã, tarde e noite) dividindo a única sala da unidade.
--- Todas as turmas possuem o mesmo professor (1 professor
--- para o curso completo).
--- ============================================================
+-- turmas da unidade de Porto Velho: são 3 (manhã, tarde e noite) que se
+-- dividem na única sala. todas têm o mesmo professor, então id_professor
+-- aponta sempre pra ele (id 9)
 CREATE TABLE IF NOT EXISTS turmas (
     id_turma        SERIAL PRIMARY KEY,
     id_curso        INTEGER NOT NULL REFERENCES cursos(id_curso),

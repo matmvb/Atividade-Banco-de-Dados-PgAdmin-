@@ -1,11 +1,8 @@
--- ============================================================
--- 003__create_table_pessoas.sql
--- Tabela única para alunos, responsáveis, professores e
--- funcionários. O responsável do aluno é um auto-relacionamento
--- (id_responsavel aponta para outra pessoa desta mesma tabela).
--- Todo aluno DEVE ter exatamente um responsável (1 responsável
--- por aluno, conforme contrato).
--- ============================================================
+-- tabela de pessoas. juntei aluno, responsável, professor e funcionário tudo
+-- aqui, porque no começo eu tinha feito uma tabela pra cada e ficava repetindo
+-- nome, cpf, telefone... aí o professor sugeriu juntar e usar o tipo_pessoa.
+-- o responsável do aluno é outra pessoa dessa mesma tabela (id_responsavel).
+-- cada aluno tem só 1 responsável, porque é quem assina o contrato e paga.
 CREATE TABLE IF NOT EXISTS pessoas (
     id_pessoa            SERIAL PRIMARY KEY,
     nome_completo        VARCHAR(150) NOT NULL,

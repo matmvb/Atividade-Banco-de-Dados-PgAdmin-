@@ -1,12 +1,6 @@
--- ============================================================
--- 015__insert_into_matriculas.sql
--- Matrículas dos 8 alunos nas 3 turmas (R$ 350,00 de mensalidade).
--- id_funcionario indica quem registrou a matrícula (secretaria
--- id 10 ou coordenador id 11). desconto exemplifica desconto
--- promocional aplicado na matrícula 3 (Arthur).
--- Turma 1 (manhã): alunos 13, 14 | Turma 2 (tarde): 15, 16, 17
--- Turma 3 (noite): 18, 19, 20
--- ============================================================
+-- matrículas dos 8 alunos. o id_funcionario é quem registrou (a renata, id 10,
+-- e o marcos, id 11, em duas matrículas). o arthur ganhou desconto de irmão
+-- (50 reais), que foi o caso que usei pra testar o campo desconto.
 INSERT INTO matriculas (id_matricula, id_aluno, id_turma, id_funcionario, data_matricula, status, valor_mensalidade, desconto, data_cancelamento, obs)
 VALUES
     (1, 13, 1, 10, '2026-02-01', 'ATIVA',     350.00, 0.00, NULL, NULL),

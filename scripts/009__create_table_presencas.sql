@@ -1,8 +1,5 @@
--- ============================================================
--- 009__create_table_presencas.sql
--- Controle de presença (aulas presenciais). Uma presença é
--- registrada por matrícula (aluno), matéria e data de aula.
--- ============================================================
+-- presença das aulas. coloquei chave única em (matrícula, matéria, data)
+-- pra não deixar o professor lançar a mesma chamada duas vezes no dia
 CREATE TABLE IF NOT EXISTS presencas (
     id_presenca  SERIAL PRIMARY KEY,
     id_matricula INTEGER NOT NULL REFERENCES matriculas(id_matricula) ON DELETE CASCADE,

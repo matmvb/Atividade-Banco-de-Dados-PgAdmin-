@@ -1,8 +1,5 @@
--- ============================================================
--- 014__insert_into_turma_materias.sql
--- Cada turma percorre integralmente as 8 matérias do curso.
--- 3 turmas x 8 matérias = 24 registros.
--- ============================================================
+-- 3 turmas x 8 matérias = 24 registros. fiz na mão mesmo pra ficar claro,
+-- mas daria pra gerar com um select cruzado entre turmas e matérias.
 INSERT INTO turma_materias (id_turma, id_materia, dia_semana)
 VALUES
     -- Turma 1 (manhã)

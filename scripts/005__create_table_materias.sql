@@ -1,8 +1,5 @@
--- ============================================================
--- 005__create_table_materias.sql
--- Matérias que compõem o curso (8 matérias da Formação Megamente).
--- A ordem indica a sequência percorrida pela turma no curso.
--- ============================================================
+-- as 8 matérias do curso. a turma passa por todas, na sequência do campo
+-- "ordem" (1 = raciocínio lógico, 2 = youtuber/edição, etc)
 CREATE TABLE IF NOT EXISTS materias (
     id_materia    SERIAL PRIMARY KEY,
     id_curso      INTEGER NOT NULL REFERENCES cursos(id_curso),

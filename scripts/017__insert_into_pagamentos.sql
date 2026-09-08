@@ -1,9 +1,6 @@
--- ============================================================
--- 017__insert_into_pagamentos.sql
--- Mensalidades geradas para as matrículas. O responsável paga a
--- mensalidade do aluno (1 responsável por aluno). Há pagamentos
--- PAGO, PENDENTE e ATRASADO para demonstrar os estados.
--- ============================================================
+-- boletos de mensalidade. coloquei alguns já pagos, outros pendentes e dois
+-- atrasados pra testar a procedure do 022. o do arthur sai por 300 reais
+-- por causa do desconto de irmão na matrícula dele.
 INSERT INTO pagamentos (id_pagamento, id_matricula, id_responsavel, data_vencimento, data_pagamento, valor, status)
 VALUES
     -- Matrícula 1 (Pedro / resp 1)

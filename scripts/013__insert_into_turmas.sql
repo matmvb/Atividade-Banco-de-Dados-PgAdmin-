@@ -1,8 +1,6 @@
--- ============================================================
--- 013__insert_into_turmas.sql
--- As 3 turmas da unidade de Porto Velho dividem a única sala:
--- manhã, tarde e noite. Todas têm o mesmo professor (id 9).
--- ============================================================
+-- as 3 turmas da unidade. o codigo tipo PV-MAN-01 é o que a secretaria usa
+-- pra identificar a turma (PV = porto velho). todas na sala 01, 15 vagas.
+-- coloquei o data_fim como o previsto pro curso de 12 meses.
 INSERT INTO turmas (id_turma, id_curso, id_unidade, id_professor, nome_turma, codigo, turno, horario_inicio, horario_fim, sala, vagas, data_inicio, data_fim)
 VALUES
     (1, 1, 1, 9, 'TURMA MANHÃ', 'PV-MAN-01', 'MANHA', '08:00:00', '12:00:00', 'Sala 01', 15, '2026-02-02', '2027-01-29'),

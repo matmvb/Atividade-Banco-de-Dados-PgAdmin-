@@ -1,20 +1,10 @@
--- ============================================================
--- 001__create_database_escola_megamente.sql
--- Cria o banco de dados escola_megamente.
+-- Script pra criar o banco. O Postgres não tem um "create database if not
+-- exists", então deixo aqui as duas formas que testei:
 --
--- IMPORTANTE: este script é um guia de referência.
--- Em outros arquivos, a criação dos objetos SQL já pode ser
--- executada múltiplas vezes. Já o CREATE DATABASE não possui
--- "IF NOT EXISTS" no PostgreSQL, portanto:
+-- 1) pelo PgAdmin (mais fácil): clicar com o botão direito em "Databases" ->
+--    Create -> Database... e digitar o nome: escola_megamente
 --
---   Opção A (recomendada - pgAdmin):
---     Botão direito em "Databases" > Create > Database...
---     Nome: escola_megamente
---
---   Opção B (terminal psql): execute o trecho abaixo a partir
---   de qualquer banco (ex.: postgres). O \gexec executa o
---   resultado do SELECT e evita erro se o banco já existir.
---
+-- 2) pelo terminal (psql): rodar o SELECT abaixo, que só cria se não existir.
+--    precisa estar conectado em outro banco (ex.: o próprio postgres).
 -- SELECT 'CREATE DATABASE escola_megamente'
 -- WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'escola_megamente')\gexec
--- ============================================================

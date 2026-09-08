@@ -1,10 +1,5 @@
--- ============================================================
--- 022__create_or_replace_procedure_atualiza_status_pagamentos.sql
--- Procedure que atualiza automaticamente o status dos pagamentos:
--- mensalidades com vencimento anterior a hoje e ainda PENDENTES
--- passam para ATRASADO.
--- Executada múltiplas vezes sem erro (CREATE OR REPLACE).
--- ============================================================
+-- procedure que marca como ATRASADO o boleto que já venceu e ninguém pagou.
+-- eu chamo ela tipo uma vez por semana na secretaria (CALL).
 CREATE OR REPLACE PROCEDURE proc_atualiza_status_pagamentos()
 LANGUAGE plpgsql
 AS $$

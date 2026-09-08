@@ -1,8 +1,5 @@
--- ============================================================
--- 016__insert_into_presencas.sql
--- Registros de presença (aulas presenciais) de agosto/2026.
--- presente = FALSE indica falta registrada pelo professor.
--- ============================================================
+-- presenças de agosto de 2026. em algumas aulas o professor lançou falta
+-- (presente = false), pra dar pra ver o controle funcionando.
 INSERT INTO presencas (id_presenca, id_matricula, id_materia, data_aula, presente)
 VALUES
     -- Pedro (matrícula 1)

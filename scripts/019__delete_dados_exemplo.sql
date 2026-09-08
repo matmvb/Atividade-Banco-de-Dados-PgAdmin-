@@ -1,8 +1,6 @@
--- ============================================================
--- 019__delete_dados_exemplo.sql
--- Validando o comando DELETE e as restrições de integridade
--- referencial (chaves estrangeiras).
--- ============================================================
+-- teste do DELETE e também pra mostrar como o banco segura quando a gente
+-- tenta apagar uma coisa que ainda está sendo usada (chave estrangeira).
+-- o número 2 fica comentado de propósito: se descomentar, dá o erro de fk.
 
 -- 1) DELETE válido: remove uma presença com lançamento incorreto
 --    (Sofia não esteve em "Youtuber/Edição" em 2026-08-04 - registrada por engano)

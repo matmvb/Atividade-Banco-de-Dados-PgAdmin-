@@ -1,9 +1,5 @@
--- ============================================================
--- 007__create_table_turma_materias.sql
--- Tabela associativa: cada turma percorre integralmente
--- as 8 matérias do curso (Formação Megamente).
--- O dia_semana indica quando a matéria é ministrada.
--- ============================================================
+-- tabela que liga turma e matéria (cada turma faz as 8 matérias do curso).
+-- o dia_semana é só pra dizer em qual dia da semana aquela matéria rola
 CREATE TABLE IF NOT EXISTS turma_materias (
     id_turma   INTEGER NOT NULL REFERENCES turmas(id_turma)   ON DELETE CASCADE,
     id_materia INTEGER NOT NULL REFERENCES materias(id_materia) ON DELETE CASCADE,

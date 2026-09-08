@@ -1,8 +1,6 @@
--- ============================================================
--- 002__create_table_unidades.sql
--- Unidades da escola espalhadas pelo Brasil.
--- A unidade de Porto Velho possui apenas 1 sala (qtde_salas = 1).
--- ============================================================
+-- tabela de unidades da escola. coloquei qtde_salas porque no futuro
+-- alguma unidade pode ter mais de uma sala, mas em Porto Velho é só 1
+-- (as 3 turmas dividem ela)
 CREATE TABLE IF NOT EXISTS unidades (
     id_unidade  SERIAL PRIMARY KEY,
     nome        VARCHAR(100) NOT NULL UNIQUE,

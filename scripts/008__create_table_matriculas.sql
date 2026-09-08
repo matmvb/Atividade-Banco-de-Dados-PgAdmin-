@@ -1,10 +1,6 @@
--- ============================================================
--- 008__create_table_matriculas.sql
--- Matrícula do aluno em uma turma. Cada aluno pode estar
--- matriculado uma única vez em cada turma (UNIQUE id_aluno,
--- id_turma). O valor mensal da matrícula alimenta os
--- pagamentos de mensalidade.
--- ============================================================
+-- matrícula do aluno na turma. guardo também quem registrou (id_funcionario,
+-- é a secretaria ou o coordenador) e o desconto caso tenha. o valor que o
+-- responsável paga é o valor_mensalidade menos o desconto.
 CREATE TABLE IF NOT EXISTS matriculas (
     id_matricula      SERIAL PRIMARY KEY,
     id_aluno          INTEGER NOT NULL REFERENCES pessoas(id_pessoa),

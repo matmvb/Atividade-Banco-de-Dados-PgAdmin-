@@ -1,7 +1,6 @@
--- ============================================================
--- 018__update_dados_exemplo.sql
--- Validando o comando UPDATE no banco de dados.
--- ============================================================
+-- teste dos comandos UPDATE. fui mudando email/telefone de cadastro, horário
+-- da turma da noite (o professor pediu pra começar mais cedo), dei baixa num
+-- pagamento atrasado e cancelei a matrícula da valentina.
 
 -- 1) Atualiza telefone e e-mail de um responsável (cadastro)
 UPDATE pessoas

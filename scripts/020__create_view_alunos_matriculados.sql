@@ -1,8 +1,6 @@
--- ============================================================
--- 020__create_view_alunos_matriculados.sql
--- View que consolida os alunos matriculados com turma, unidade,
--- professor e responsável.
--- ============================================================
+-- view que eu usei pra conferir no pgadmin: lista os alunos com matrícula
+-- ativa junto da turma, unidade, professor, responsável e o valor que ele
+-- paga (já com o desconto).
 CREATE OR REPLACE VIEW view_alunos_matriculados AS
 SELECT
     a.id_pessoa                        AS id_aluno,

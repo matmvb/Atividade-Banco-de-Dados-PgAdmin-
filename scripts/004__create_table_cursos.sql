@@ -1,8 +1,5 @@
--- ============================================================
--- 004__create_table_cursos.sql
--- A escola possui um curso único: "Formação Megamente",
--- composto por 8 matérias percorridas pelas turmas.
--- ============================================================
+-- o curso da escola (Formação Megamente). guardei aqui também o valor da
+-- mensalidade e a faixa etária, que são coisas do curso
 CREATE TABLE IF NOT EXISTS cursos (
     id_curso            SERIAL PRIMARY KEY,
     nome_curso          VARCHAR(120) NOT NULL UNIQUE,
