@@ -200,27 +200,11 @@ erDiagram
     └── 022__create_or_replace_procedure_atualiza_status_pagamentos.sql
 ```
 
-## Como rodar no PgAdmin
+## Execução
 
-1. Cria o banco `escola_megamente` (botão direito em *Databases* → *Create* →
-   *Database...*), ou pelo script `001`.
-2. Abre o *Query Tool* e executa os scripts **em ordem numérica** (001 → 022).
-   Os números já estão na ordem certa das dependências (tabela antes de dados).
-3. Depois dá pra testar isso aí:
-
-```sql
--- ver os alunos que estão matriculados (com turma e responsável)
-SELECT * FROM view_alunos_matriculados;
-
--- ver quem tá devendo mensalidade
-SELECT * FROM view_pagamentos_pendentes;
-
--- marcar como atrasado o que venceu e não foi pago
-CALL proc_atualiza_status_pagamentos();
-```
-
-Dá pra rodar os scripts mais de uma vez sem erro: as tabelas usam
-`CREATE TABLE IF NOT EXISTS` e os inserts usam `ON CONFLICT DO NOTHING`.
+Os scripts estão numerados na ordem de execução (001 ao 022). Eles podem ser
+rodados mais de uma vez sem erro, porque as tabelas usam `CREATE TABLE IF NOT
+EXISTS` e os inserts usam `ON CONFLICT DO NOTHING`.
 
 ## Anotações / o que eu aprendi
 
