@@ -19,7 +19,7 @@ Trabalho da disciplina de banco de dados feito com **PostgreSQL** + **PgAdmin**.
 
 ---
 
-O tema que escolhi foi a **Escola Megamente**, uma escola de programação,
+O tema escolhido foi a **Escola Megamente**, uma escola de programação,
 robótica e games para crianças e adolescentes, que trabalha a metodologia
 STEAM. Modelei a unidade de **Porto Velho/RO**.
 
