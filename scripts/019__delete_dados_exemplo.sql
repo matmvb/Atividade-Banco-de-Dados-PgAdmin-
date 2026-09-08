@@ -5,7 +5,7 @@
 -- ============================================================
 
 -- 1) DELETE válido: remove uma presença com lançamento incorreto
---    (Pedro não esteve em Raciocínio Lógico em 2026-08-03 - registrada por engano)
+--    (Sofia não esteve em "Youtuber/Edição" em 2026-08-04 - registrada por engano)
 DELETE FROM presencas
 WHERE id_presenca = 2;
 
@@ -18,13 +18,15 @@ WHERE id_presenca = 2;
 
 -- 3) DELETE em cascata (demonstração):
 --    Remover os dados da matrícula cancelada da Valentina.
---    Presenças e pagamentos precisam ser removidos ANTES da matrícula.
+--    * pagamentos NÃO possuem ON DELETE CASCADE -> remover ANTES
+--    * presencas possuem ON DELETE CASCADE -> apagar matrícula basta,
+--      mas o DELETE explícito também é válido
 DELETE FROM pagamentos WHERE id_matricula = 8;
-DELETE FROM presencas WHERE id_matricula = 8;
 DELETE FROM matriculas WHERE id_matricula = 8;
 
 -- 4) DELETE com ON DELETE CASCADE (demonstração):
---    Excluir a turma da noite remove automaticamente as associações
---    da tabela turma_materias (OBS: também exigiria remover matrículas
---    antes, por isso o trecho fica comentado):
+--    Excluir a turma da noite apagaria automaticamente suas associações
+--    em turma_materias. Porém MATRICULAS reference turmas sem CASCADE,
+--    então seria preciso remover matrículas 6 e 7 antes. Trecho comentado:
+-- DELETE FROM matriculas WHERE id_turma = 3;
 -- DELETE FROM turmas WHERE id_turma = 3;

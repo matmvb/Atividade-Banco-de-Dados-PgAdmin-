@@ -137,7 +137,6 @@ erDiagram
     PRESENCAS {
         serial id_presenca PK
         int id_matricula FK
-        int id_turma FK
         int id_materia FK
         date data_aula
         boolean presente
@@ -164,7 +163,6 @@ erDiagram
     PESSOAS ||--o{ MATRICULAS : "aluno realiza"
     TURMAS ||--o{ MATRICULAS : "recebe matrículas"
     MATRICULAS ||--o{ PRESENCAS : "registra frequência"
-    TURMAS ||--o{ PRESENCAS : "tem chamadas"
     MATERIAS ||--o{ PRESENCAS : "referência"
     MATRICULAS ||--o{ PAGAMENTOS : "gera mensalidades"
     PESSOAS ||--o{ PAGAMENTOS : "responsável paga"
@@ -176,3 +174,37 @@ erDiagram
 - **1 responsável por aluno** (responsável legal e financeiro do contrato), modelado como auto-relacionamento em `pessoas.id_responsavel`.
 - Cada unidade possui **1 sala** (`qtde_salas = 1`); em Porto Velho existem **3 turmas** (manhã, tarde e noite) dividindo a única sala.
 - Controle de **matrículas, presença e pagamentos de mensalidade**. O modelo suporta múltiplas unidades no Brasil.
+
+---
+
+## Como Executar no pgAdmin
+
+1. Abra o **pgAdmin** e conecte-se ao servidor PostgreSQL.
+2. Crie o banco `escola_megamente` (botão direito em *Databases* → *Create* → *Database...*).
+3. Abra o **Query Tool** (botão direito no banco `escola_megamente` → *Query Tool*).
+4. Abra e execute os scripts **em ordem numérica** (001 → 022), dentro da pasta `scripts/`:
+
+| Ordem | Script | Ação |
+|---|---|---|
+| `001` | `create_database_escola_megamente.sql` | Guia de criação do banco (ou crie via GUI) |
+| `002`–`010` | `create_table_*.sql` | Criação das 9 tabelas (DDL) |
+| `011`–`017` | `insert_into_*.sql` | Dados de exemplo (DML – INSERT) |
+| `018` | `update_dados_exemplo.sql` | Validação de UPDATE |
+| `019` | `delete_dados_exemplo.sql` | Validação de DELETE e chaves estrangeiras |
+| `020`–`021` | `create_view_*.sql` | Views: alunos matriculados e pagamentos pendentes |
+| `022` | `create_or_replace_procedure_*.sql` | Procedure de atualização de status |
+
+5. Execute a procedure criada para marcar mensalidades vencidas como atrasadas:
+
+```sql
+CALL proc_atualiza_status_pagamentos();
+```
+
+6. Consulte as views:
+
+```sql
+SELECT * FROM view_alunos_matriculados;
+SELECT * FROM view_pagamentos_pendentes;
+```
+
+> **Dica:** os scripts DDL usam `CREATE TABLE IF NOT EXISTS` e os DML usam `ON CONFLICT DO NOTHING`, permitindo executá-los múltiplas vezes sem erro.

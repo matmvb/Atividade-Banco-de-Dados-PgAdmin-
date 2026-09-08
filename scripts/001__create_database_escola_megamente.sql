@@ -1,8 +1,20 @@
 -- ============================================================
 -- 001__create_database_escola_megamente.sql
 -- Cria o banco de dados escola_megamente.
--- Deve ser executado conectado no banco "postgres" (ou outro).
--- Executável múltiplas vezes sem erro.
+--
+-- IMPORTANTE: este script é um guia de referência.
+-- Em outros arquivos, a criação dos objetos SQL já pode ser
+-- executada múltiplas vezes. Já o CREATE DATABASE não possui
+-- "IF NOT EXISTS" no PostgreSQL, portanto:
+--
+--   Opção A (recomendada - pgAdmin):
+--     Botão direito em "Databases" > Create > Database...
+--     Nome: escola_megamente
+--
+--   Opção B (terminal psql): execute o trecho abaixo a partir
+--   de qualquer banco (ex.: postgres). O \gexec executa o
+--   resultado do SELECT e evita erro se o banco já existir.
+--
+-- SELECT 'CREATE DATABASE escola_megamente'
+-- WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'escola_megamente')\gexec
 -- ============================================================
-SELECT 'CREATE DATABASE escola_megamente'
-WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'escola_megamente')\gexec
