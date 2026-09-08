@@ -22,6 +22,6 @@ VALUES
     (11, 6,  6, '2026-07-05', NULL,         350.00, 'ATRASADO'),
     (12, 6,  6, '2026-08-05', '2026-08-06', 350.00, 'PAGO'),
     -- Matrícula 7 (Davi / resp 7) - pendente com vencimento vencido
-    (13, 7,  7, '2026-08-05', NULL,         350.00, 'PENDENTE'),
+    (13, 7,  7, '2026-08-05', NULL,         350.00, 'PENDENTE')
     -- Matrícula 8 (Valentina / resp 8) - sem pagamento ainda
 ON CONFLICT (id_pagamento) DO NOTHING;
