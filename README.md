@@ -61,3 +61,118 @@ Todos os scripts seguem o padrão `[Versão]__[acao]_[descricao/objeto].sql`:
 - `022__` → `CREATE OR REPLACE PROCEDURE`
 
 > **Dica:** todos os scripts podem ser executados múltiplas vezes sem erro (uso de `IF NOT EXISTS` e `ON CONFLICT DO NOTHING`).
+
+---
+
+## Modelo de Dados Relacional
+
+```mermaid
+erDiagram
+    UNIDADES {
+        serial id_unidade PK
+        varchar nome
+        varchar cidade
+        varchar estado
+        varchar endereco
+        varchar telefone
+        int qtde_salas
+    }
+
+    PESSOAS {
+        serial id_pessoa PK
+        varchar nome_completo
+        char cpf
+        date data_nascimento
+        varchar email
+        varchar telefone
+        varchar tipo_pessoa
+        varchar cargo
+        int id_unidade FK
+        int id_responsavel FK
+        date data_ingresso
+    }
+
+    CURSOS {
+        serial id_curso PK
+        varchar nome_curso
+        text descricao
+        int duracao_meses
+        int carga_horaria_total
+    }
+
+    MATERIAS {
+        serial id_materia PK
+        int id_curso FK
+        varchar nome_materia
+        int carga_horaria
+        int ordem
+    }
+
+    TURMAS {
+        serial id_turma PK
+        int id_curso FK
+        int id_unidade FK
+        int id_professor FK
+        varchar nome_turma
+        varchar turno
+        time horario_inicio
+        time horario_fim
+    }
+
+    TURMA_MATERIAS {
+        int id_turma PK,FK
+        int id_materia PK,FK
+        varchar dia_semana
+    }
+
+    MATRICULAS {
+        serial id_matricula PK
+        int id_aluno FK
+        int id_turma FK
+        date data_matricula
+        varchar status
+        numeric valor_mensalidade
+    }
+
+    PRESENCAS {
+        serial id_presenca PK
+        int id_matricula FK
+        int id_turma FK
+        int id_materia FK
+        date data_aula
+        boolean presente
+    }
+
+    PAGAMENTOS {
+        serial id_pagamento PK
+        int id_matricula FK
+        int id_responsavel FK
+        date data_vencimento
+        date data_pagamento
+        numeric valor
+        varchar status
+    }
+
+    UNIDADES ||--o{ PESSOAS : "emprega / atende"
+    UNIDADES ||--o{ TURMAS : "abriga"
+    PESSOAS ||--o{ PESSOAS : "responsável pelo aluno"
+    PESSOAS ||--o{ TURMAS : "professor ministra"
+    CURSOS ||--o{ MATERIAS : "composto por"
+    CURSOS ||--o{ TURMAS : "gera turmas"
+    TURMAS ||--o{ TURMA_MATERIAS : "percorre"
+    MATERIAS ||--o{ TURMA_MATERIAS : "é ministrada em"
+    PESSOAS ||--o{ MATRICULAS : "aluno realiza"
+    TURMAS ||--o{ MATRICULAS : "recebe matrículas"
+    MATRICULAS ||--o{ PRESENCAS : "registra frequência"
+    TURMAS ||--o{ PRESENCAS : "tem chamadas"
+    MATERIAS ||--o{ PRESENCAS : "referência"
+    MATRICULAS ||--o{ PAGAMENTOS : "gera mensalidades"
+    PESSOAS ||--o{ PAGAMENTOS : "responsável paga"
+```
+
+### Decisões de modelagem
+- **1 curso único** ("Formação Megamente") com **8 matérias**, percorridas integralmente por todas as turmas (tabela associativa `turma_materias`).
+- **1 professor** vinculado a todas as turmas; **funcionários e professores** estão na mesma tabela `pessoas`, diferenciados por `tipo_pessoa`/`cargo`.
+- **1 responsável por aluno** (responsável legal e financeiro do contrato), modelado como auto-relacionamento em `pessoas.id_responsavel`.
+- Cada unidade possui **1 sala** (`qtde_salas = 1`); em Porto Velho existem **3 turmas** (manhã, tarde e noite) dividindo a única sala.
+- Controle de **matrículas, presença e pagamentos de mensalidade**. O modelo suporta múltiplas unidades no Brasil.
