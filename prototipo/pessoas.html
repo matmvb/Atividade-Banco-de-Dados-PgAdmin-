@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pessoas - Escola Megamente</title>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+    <div class="app">
+        <aside class="sidebar">
+            <div class="brand">🧠 Megamente <span style="font-size:11px;color:#94a3b8">PVH</span></div>
+            <nav>
+                <a href="index.html">📊 Principal</a>
+                <a href="pessoas.html" class="active">👥 Pessoas</a>
+                <a href="gamificacao.html">🏆 Gamificação</a>
+            </nav>
+            <div class="sidebar-user">
+                <b id="nomeUsuario">—</b>
+                <span id="cargoUsuario">—</span><br><br>
+                <a href="#" onclick="sair()">↩ Sair</a>
+            </div>
+        </aside>
+
+        <main class="main">
+            <h1>Gerenciamento de Pessoas</h1>
+            <p class="page-sub">Alunos, responsáveis, professor e funcionários da unidade.</p>
+
+            <div class="toolbar">
+                <input type="search" id="buscaPessoas" placeholder="Buscar por nome ou tipo..." oninput="filtrarPessoas()">
+                <button class="btn btn-success">+ Novo cadastro</button>
+            </div>
+
+            <div class="panel">
+                <table>
+                    <thead>
+                        <tr><th></th><th>Nome completo</th><th>Tipo</th><th>Cargo</th><th>Status</th></tr>
+                    </thead>
+                    <tbody id="tbodyPessoas"></tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <script src="assets/app.js"></script>
+</body>
+</html>

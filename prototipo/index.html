@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Principal - Escola Megamente</title>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+    <div class="app">
+        <aside class="sidebar">
+            <div class="brand">🧠 Megamente <span style="font-size:11px;color:#94a3b8">PVH</span></div>
+            <nav>
+                <a href="index.html" class="active">📊 Principal</a>
+                <a href="pessoas.html">👥 Pessoas</a>
+                <a href="gamificacao.html">🏆 Gamificação</a>
+            </nav>
+            <div class="sidebar-user">
+                <b id="nomeUsuario">—</b>
+                <span id="cargoUsuario">—</span><br><br>
+                <a href="#" onclick="sair()">↩ Sair</a>
+            </div>
+        </aside>
+
+        <main class="main">
+            <h1>Painel da Unidade <span style="font-size:14px;color:#94a3b8">Porto Velho/RO</span></h1>
+            <p class="page-sub">Visão geral da escola Megamente.</p>
+
+            <div class="cards">
+                <div class="card"><div class="card-icone">🏫</div><div class="card-valor">1</div><div class="card-label">Unidade</div></div>
+                <div class="card"><div class="card-icone">🧑‍🎓</div><div class="card-valor">8</div><div class="card-label">Alunos</div></div>
+                <div class="card"><div class="card-icone">📚</div><div class="card-valor">3</div><div class="card-label">Turmas</div></div>
+                <div class="card"><div class="card-icone">📖</div><div class="card-valor">8</div><div class="card-label">Matérias</div></div>
+                <div class="card"><div class="card-icone">💰</div><div class="card-valor">R$ 350,00</div><div class="card-label">Mensalidade</div></div>
+            </div>
+
+            <div class="panel">
+                <h2>📌 Top 3 do ranking (gamificação)</h2>
+                <table>
+                    <thead>
+                        <tr><th>#</th><th>Aluno</th><th>Turma</th><th>Nível</th><th>XP</th></tr>
+                    </thead>
+                    <tbody id="tbodyRankingTop"></tbody>
+                </table>
+            </div>
+
+            <div class="panel">
+                <h2>💳 Mensalidades em aberto</h2>
+                <table>
+                    <thead>
+                        <tr><th>Aluno</th><th>Turma</th><th>Vencimento</th><th>Valor</th><th>Status</th></tr>
+                    </thead>
+                    <tbody id="tbodyPagamentos"></tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <script src="assets/app.js"></script>
+</body>
+</html>

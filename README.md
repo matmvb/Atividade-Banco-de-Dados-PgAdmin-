@@ -46,6 +46,31 @@ Organizar num banco só as coisas do dia a dia da escola:
 
 Assim a secretaria e o financeiro não dependem mais de planilha.
 
+## Inovação: Gamificação 🎮
+
+Adicionei **gamificação** pra engajar alunos e famílias: o aluno acumula **XP**
+participando das aulas (25 XP por presença) e desbloqueando **conquistas**,
+subindo de **nível** (de *Iniciante* até *Mestre Megamente*) dentro de um
+**ranking** da unidade.
+
+Como funciona:
+
+- **Níveis** — faixas de XP com títulos e cores (Iniciante, Aprendiz,
+  Explorador, Criador, Mestre Megamente);
+- **Conquistas** — medalhas com pontos de XP (ex.: *Frequência Perfeita*,
+  *Mestre em Programação*);
+- **Progresso do aluno** — XP acumulado + nível atual de cada aluno
+  (relação 1 pra 1);
+- **Ranking** — a view `view_ranking_alunos` mostra a posição de cada aluno,
+  ordenada pelo XP;
+- **Procedure `proc_recalcula_xp_alunos`** — recalcula o XP de todos a partir
+  das presenças somadas às conquistas e reajusta o nível automaticamente.
+  Basta rodar `CALL proc_recalcula_xp_alunos()`.
+
+Isso deixa a escola mais atrativa pro público (crianças e adolescentes) e usa
+dados que já existiam (presenças) pra gerar engajamento — sem depender de
+planilha.
+
 ### Público-alvo
 
 - **Secretaria** — cadastro de alunos, responsáveis, turmas e matrículas;
@@ -172,6 +197,39 @@ erDiagram
         varchar status
     }
 
+    NIVEIS {
+        serial id_nivel PK
+        varchar nome_nivel
+        int xp_min
+        int xp_max
+        varchar titulo
+        varchar cor
+        varchar icone
+    }
+
+    CONQUISTAS {
+        serial id_conquista PK
+        varchar nome_conquista
+        text descricao
+        int pontos
+        varchar icone
+        varchar condicao
+    }
+
+    PROGRESSO_ALUNOS {
+        serial id_progresso PK
+        int id_aluno FK,UK
+        int id_nivel FK
+        int xp_total
+        timestamp data_atualizacao
+    }
+
+    ALUNO_CONQUISTAS {
+        int id_aluno PK,FK
+        int id_conquista PK,FK
+        date data_conquista
+    }
+
     UNIDADES ||--o{ PESSOAS : "emprega / atende"
     UNIDADES ||--o{ TURMAS : "abriga"
     CURSOS ||--o{ MATERIAS : "composto por"
@@ -186,12 +244,24 @@ erDiagram
     MATERIAS ||--o{ PRESENCAS : "referência"
     MATRICULAS ||--o{ PAGAMENTOS : "gera mensalidades"
     PESSOAS ||--o{ PAGAMENTOS : "responsável paga"
+    NIVEIS     ||--o{ PROGRESSO_ALUNOS : "define nível"
+    PESSOAS    ||--o{ PROGRESSO_ALUNOS : "acumula XP"
+    PESSOAS    ||--o{ ALUNO_CONQUISTAS : "desbloqueia"
+    CONQUISTAS ||--o{ ALUNO_CONQUISTAS : "é conquistada"
 ```
 
 ## Estrutura dos arquivos
 
 ```
 ├── README.md
+├── prototipo/                              (protótipo da interface - HTML/CSS)
+│   ├── login.html                          (tela de login)
+│   ├── index.html                          (tela principal / dashboard)
+│   ├── pessoas.html                        (gerenciamento de pessoas)
+│   ├── gamificacao.html                    (ranking e conquistas)
+│   └── assets/
+│       ├── style.css                       (estilo do protótipo)
+│       └── app.js                          (interações do protótipo)
 └── scripts/
     ├── 001__create_database_escola_megamente.sql   (guia de criação do banco)
     ├── 002__create_table_unidades.sql              (criação das tabelas - DDL)
@@ -214,14 +284,47 @@ erDiagram
     ├── 019__delete_dados_exemplo.sql               (teste do DELETE)
     ├── 020__create_view_alunos_matriculados.sql    (views)
     ├── 021__create_view_pagamentos_pendentes.sql
-    └── 022__create_or_replace_procedure_atualiza_status_pagamentos.sql
+    ├── 022__create_or_replace_procedure_atualiza_status_pagamentos.sql
+    ├── 023__create_table_niveis.sql                (INOVAÇÃO: gamificação - DDL)
+    ├── 024__create_table_conquistas.sql
+    ├── 025__create_table_progresso_alunos.sql
+    ├── 026__create_table_aluno_conquistas.sql
+    ├── 027__insert_into_niveis.sql                 (INOVAÇÃO: gamificação - DML)
+    ├── 028__insert_into_conquistas.sql
+    ├── 029__insert_into_progresso_alunos.sql
+    ├── 030__insert_into_aluno_conquistas.sql
+    ├── 031__create_view_ranking_alunos.sql         (INOVAÇÃO: gamificação - view)
+    └── 032__create_or_replace_procedure_recalcula_xp_alunos.sql
 ```
 
 ## Execução
 
-Os scripts estão numerados na ordem de execução (001 ao 022). Eles podem ser
+Os scripts estão numerados na ordem de execução (001 ao 032). Eles podem ser
 rodados mais de uma vez sem erro, porque as tabelas usam `CREATE TABLE IF NOT
 EXISTS` e os inserts usam `ON CONFLICT DO NOTHING`.
+
+Os scripts de gamificação (023 ao 032) criam as tabelas novas, inserem os
+níveis/conquistas/progresso iniciais e geram a view de ranking e a procedure
+de XP. Pra validar, roda:
+
+```sql
+SELECT * FROM view_ranking_alunos;          -- posição de cada aluno
+SELECT * FROM view_alunos_matriculados;    -- view já existente
+CALL proc_recalcula_xp_alunos();           -- recalcula XP e níveis
+```
+
+## Protótipo da interface
+
+A pasta `prototipo/` tem uma versão simples da interface (HTML/CSS/JS) pra
+visualizar como as pessoas usariam o sistema:
+
+- **login.html** — acesso de secretaria, professor e direção;
+- **index.html** — tela principal com os números da escola (dashboard);
+- **pessoas.html** — gerenciamento de cadastro de pessoas;
+- **gamificacao.html** — ranking e conquistas (a inovação).
+
+Basta abrir o `login.html` no navegador — o protótipo é estático, com dados de
+exemplo iguais aos do banco.
 
 ## Anotações / o que eu aprendi
 
@@ -231,4 +334,6 @@ EXISTS` e os inserts usam `ON CONFLICT DO NOTHING`.
   recusa (chave estrangeira) — deixei um exemplo disso comentado no `019`;
 - coloquei `salario` na tabela de pessoas, mas ele só é preenchido pra
   professor e funcionários (restrição `CHECK`);
-- os CPFs, e-mails e endereços dos dados de exemplo são **fictícios**.
+- os CPFs, e-mails e endereços dos dados de exemplo são **fictícios**;
+- na gamificação o XP é calculado assim: **presenças × 25 + pontos das
+  conquistas**, e o nível vem da faixa de XP (ver script `032`).

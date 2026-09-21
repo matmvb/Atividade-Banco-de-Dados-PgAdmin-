@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Escola Megamente</title>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+    <div class="login-wrapper">
+        <div class="login-card">
+            <div class="logo">🧠</div>
+            <h1>Escola Megamente</h1>
+            <p class="subtitle">Sistema da unidade Porto Velho</p>
+            <span class="badge-gamificacao">✦ Inovação: Gamificação ✦</span>
+
+            <p class="subtitle" style="margin-bottom:12px">Entre como:</p>
+            <div class="perfil-cards">
+                <div class="perfil-card" onclick="selecionarPerfil(this)" data-perfil="secretaria">
+                    <span class="perfil-icone">🗂️</span>
+                    <div>
+                        <div class="perfil-nome">Secretaria</div>
+                        <div class="perfil-desc">Cadastros, matrículas e presenças</div>
+                    </div>
+                </div>
+                <div class="perfil-card" onclick="selecionarPerfil(this)" data-perfil="professor">
+                    <span class="perfil-icone">📘</span>
+                    <div>
+                        <div class="perfil-nome">Professor</div>
+                        <div class="perfil-desc">Lançar presenças e acompanhar turmas</div>
+                    </div>
+                </div>
+                <div class="perfil-card" onclick="selecionarPerfil(this)" data-perfil="direcao">
+                    <span class="perfil-icone">🏛️</span>
+                    <div>
+                        <div class="perfil-nome">Direção</div>
+                        <div class="perfil-desc">Dashboard, ranking e financeiro</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" placeholder="voce@megamente.com.br" value="renata@megamente.com.br">
+            </div>
+            <div class="field">
+                <label for="senha">Senha</label>
+                <input type="password" id="senha" placeholder="••••••••" value="123456">
+            </div>
+
+            <button class="btn btn-primary" onclick="entrar()">Entrar →</button>
+            <p class="login-error" id="loginError">Selecione um perfil para entrar.</p>
+        </div>
+    </div>
+
+    <script src="assets/app.js"></script>
+</body>
+</html>

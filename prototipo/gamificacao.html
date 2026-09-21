@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gamificação - Escola Megamente</title>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+    <div class="app">
+        <aside class="sidebar">
+            <div class="brand">🧠 Megamente <span style="font-size:11px;color:#94a3b8">PVH</span></div>
+            <nav>
+                <a href="index.html">📊 Principal</a>
+                <a href="pessoas.html">👥 Pessoas</a>
+                <a href="gamificacao.html" class="active">🏆 Gamificação</a>
+            </nav>
+            <div class="sidebar-user">
+                <b id="nomeUsuario">—</b>
+                <span id="cargoUsuario">—</span><br><br>
+                <a href="#" onclick="sair()">↩ Sair</a>
+            </div>
+        </aside>
+
+        <main class="main">
+            <h1>🏆 Ranking de Gamificação</h1>
+            <p class="page-sub">Alunos ganham XP por presença (25 XP) e conquistas — subindo de Iniciante até Mestre Megamente.</p>
+
+            <div class="cards">
+                <div class="card"><div class="card-icone">👑</div><div class="card-valor" id="top1">—</div><div class="card-label">Líder do ranking</div></div>
+                <div class="card"><div class="card-icone">🎯</div><div class="card-valor" id="mediaXp">—</div><div class="card-label">XP médio dos alunos</div></div>
+                <div class="card"><div class="card-icone">⭐</div><div class="card-valor" id="totalConq">—</div><div class="card-label">Conquistas desbloqueadas</div></div>
+            </div>
+
+            <div class="panel">
+                <h2>🔥 Pódio</h2>
+                <div class="podio" id="podio"></div>
+            </div>
+
+            <div class="panel">
+                <h2>📋 Ranking completo</h2>
+                <div class="toolbar">
+                    <input type="search" id="buscaRanking" placeholder="Buscar aluno ou turma..." oninput="filtrarRanking()">
+                </div>
+                <table>
+                    <thead>
+                        <tr><th>#</th><th>Aluno</th><th>Turma</th><th>Nível</th><th>XP</th><th>Conquistas</th></tr>
+                    </thead>
+                    <tbody id="tbodyRanking"></tbody>
+                </table>
+            </div>
+
+            <p class="footer-note">Protótipo estático com dados de exemplo espelhando o banco db18 (script 031 <i>view_ranking_alunos</i>).</p>
+        </main>
+    </div>
+
+    <script src="assets/app.js"></script>
+</body>
+</html>
