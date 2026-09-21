@@ -3,7 +3,7 @@
 -- o número 2 fica comentado de propósito: se descomentar, dá o erro de fk.
 
 -- 1) DELETE válido: remove uma presença com lançamento incorreto
---    (Sofia não esteve em "Youtuber/Edição" em 2026-08-04 - registrada por engano)
+--    (Pedro não esteve em "Youtuber/Edição" em 2026-08-04 - registrada por engano)
 DELETE FROM presencas
 WHERE id_presenca = 2;
 
