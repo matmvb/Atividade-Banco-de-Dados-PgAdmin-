@@ -15,7 +15,7 @@ Trabalho da disciplina de banco de dados feito com **PostgreSQL** + **PgAdmin**.
 - NICOLAS DE LAIA FERREIRA FONSECA
 - JOÃO PEDRO MENDES DE QUEIROZ
 - LUCAS FELIPE
-- NICOLAS MOURA
+- NICOLAS MOURA BATISTA DE LACERDA
 
 ---
 
