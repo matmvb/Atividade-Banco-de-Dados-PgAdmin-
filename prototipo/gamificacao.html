@@ -2,125 +2,115 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gamificação - Escola Megamente</title>
     <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
-    <div class="app">
-        <aside class="sidebar">
-            <div class="brand">🧠 Megamente <span style="font-size:11px;color:#94a3b8">PVH</span></div>
-            <nav>
-                <a href="index.html">📊 Principal</a>
-                <a href="pessoas.html">👥 Pessoas</a>
-                <a href="gamificacao.html" class="active">🏆 Gamificação</a>
-            </nav>
-            <div class="sidebar-user">
-                <b id="nomeUsuario">—</b>
-                <span id="cargoUsuario">—</span><br><br>
-                <a href="#" onclick="sair()">↩ Sair</a>
-            </div>
-        </aside>
 
-        <main class="main">
-            <h1>🏆 Ranking de Gamificação</h1>
-            <p class="page-sub">Alunos ganham XP por presença (25 XP) e conquistas — subindo de Iniciante até Mestre Megamente.</p>
+<div class="menu">
+    <a href="index.html">📊 Principal</a>
+    <a href="pessoas.html">👥 Pessoas</a>
+    <a href="gamificacao.html" class="ativo">🏆 Gamificação</a>
+    <span class="usuario" id="usuarioLogado"></span>
+    <span class="usuario"><a href="#" onclick="sair()">Sair</a></span>
+</div>
 
-            <div class="cards">
-                <div class="card"><div class="card-icone">👑</div><div class="card-valor" id="top1">Arthur 🏆</div><div class="card-label">Líder do ranking</div></div>
-                <div class="card"><div class="card-icone">🎯</div><div class="card-valor" id="mediaXp">394 XP</div><div class="card-label">XP médio dos alunos</div></div>
-                <div class="card"><div class="card-icone">⭐</div><div class="card-valor" id="totalConq">16</div><div class="card-label">Conquistas desbloqueadas</div></div>
-            </div>
+<div class="container">
 
-            <div class="panel">
-                <h2>🔥 Pódio</h2>
-                <div class="podio" id="podio">
-                    <div class="podio-item">
-                        <div class="rank">🥈</div>
-                        <div class="nome">Pedro Henrique Alves</div>
-                        <div style="font-size:12px;color:var(--muted)">TURMA MANHÃ</div>
-                        <div class="xp">575 XP</div>
-                        <div class="progresso"><span>Explorador</span><div class="barra"><span style="width:29%"></span></div></div>
-                    </div>
-                    <div class="podio-item podio-top">
-                        <div class="rank">🥇</div>
-                        <div class="nome">Arthur Mendes Rocha</div>
-                        <div style="font-size:12px;color:var(--muted)">TURMA TARDE</div>
-                        <div class="xp">1350 XP</div>
-                        <div class="progresso"><span>Criador</span><div class="barra"><span style="width:68%"></span></div></div>
-                    </div>
-                    <div class="podio-item">
-                        <div class="rank">🥉</div>
-                        <div class="nome">Gabriel Teixeira Nunes</div>
-                        <div style="font-size:12px;color:var(--muted)">TURMA TARDE</div>
-                        <div class="xp">500 XP</div>
-                        <div class="progresso"><span>Explorador</span><div class="barra"><span style="width:25%"></span></div></div>
-                    </div>
-                </div>
-            </div>
+    <h1>Ranking de Gamificação</h1>
+    <p class="subtitulo">Alunos ganham XP por presença (25 XP) e conquistas. Subindo de Iniciante até Mestre Megamente.</p>
 
-            <div class="panel">
-                <h2>📋 Ranking completo</h2>
-                <div class="toolbar">
-                    <input type="search" id="buscaRanking" placeholder="Buscar aluno ou turma..." oninput="filtrarRanking()">
-                </div>
-                <table>
-                    <thead>
-                        <tr><th>#</th><th>Aluno</th><th>Turma</th><th>Nível</th><th>XP</th><th>Conquistas</th></tr>
-                    </thead>
-                    <tbody id="tbodyRanking">
-                        <tr><td>🥇</td><td>Arthur Mendes Rocha</td><td>TURMA TARDE</td><td><span class="badge badge-nivel" style="color:#9c27b0">Criador</span></td><td><b>1350 XP</b></td><td><span class="conquista-chip">🎯</span><span class="conquista-chip">📅</span><span class="conquista-chip">🤖</span><span class="conquista-chip">🏆</span><span class="conquista-chip">🌍</span></td></tr>
-                        <tr><td>🥈</td><td>Pedro Henrique Alves</td><td>TURMA MANHÃ</td><td><span class="badge badge-nivel" style="color:#ff9800">Explorador</span></td><td><b>575 XP</b></td><td><span class="conquista-chip">🎯</span><span class="conquista-chip">💻</span><span class="conquista-chip">🏆</span></td></tr>
-                        <tr><td>🥉</td><td>Gabriel Teixeira Nunes</td><td>TURMA TARDE</td><td><span class="badge badge-nivel" style="color:#ff9800">Explorador</span></td><td><b>500 XP</b></td><td><span class="conquista-chip">📅</span><span class="conquista-chip">🏆</span></td></tr>
-                        <tr><td>4</td><td>Laura Ferreira Dias</td><td>TURMA TARDE</td><td><span class="badge badge-nivel" style="color:#2196f3">Aprendiz</span></td><td><b>300 XP</b></td><td><span class="conquista-chip">🎯</span><span class="conquista-chip">💻</span></td></tr>
-                        <tr><td>5</td><td>Sofia Lima Castro</td><td>TURMA MANHÃ</td><td><span class="badge badge-nivel" style="color:#2196f3">Aprendiz</span></td><td><b>250 XP</b></td><td><span class="conquista-chip">🎯</span><span class="conquista-chip">📅</span></td></tr>
-                        <tr><td>6</td><td>Davi Sousa Pinto</td><td>TURMA NOITE</td><td><span class="badge badge-nivel" style="color:#9e9e9e">Iniciante</span></td><td><b>100 XP</b></td><td><span class="conquista-chip">🎯</span></td></tr>
-                        <tr><td>7</td><td>Manuela Cardoso Reis</td><td>TURMA NOITE</td><td><span class="badge badge-nivel" style="color:#9e9e9e">Iniciante</span></td><td><b>75 XP</b></td><td><span class="conquista-chip">🎯</span></td></tr>
-                        <tr><td>8</td><td>Valentina Azevedo Gomes</td><td>TURMA NOITE</td><td><span class="badge badge-nivel" style="color:#9e9e9e">Iniciante</span></td><td><b>0 XP</b></td><td></td></tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="panel">
-                <h2>🎖️ Catálogo de conquistas</h2>
-                <p class="page-sub">Conquistas disponíveis para desbloquear. Cada uma soma pontos no XP do aluno.</p>
-                <table>
-                    <thead>
-                        <tr><th></th><th>Conquista</th><th>Condição</th><th>Pontos</th></tr>
-                    </thead>
-                    <tbody id="tbodyConquistas">
-                        <tr><td><span class="conquista-chip">🎯</span></td><td>Primeira Presença</td><td>Registrar a 1ª presença</td><td><b>+50 XP</b></td></tr>
-                        <tr><td><span class="conquista-chip">📅</span></td><td>Frequência Perfeita</td><td>Não faltar nenhuma aula no mês</td><td><b>+150 XP</b></td></tr>
-                        <tr><td><span class="conquista-chip">💻</span></td><td>Mestre em Programação</td><td>Completar a matéria Jogos 2D</td><td><b>+200 XP</b></td></tr>
-                        <tr><td><span class="conquista-chip">🤖</span></td><td>Mestre em Robótica</td><td>Finalizar o módulo de Robótica</td><td><b>+200 XP</b></td></tr>
-                        <tr><td><span class="conquista-chip">🏆</span></td><td>Super Criador</td><td>3 projetos com nota máxima</td><td><b>+300 XP</b></td></tr>
-                        <tr><td><span class="conquista-chip">⭐</span></td><td>Estrela do Curso</td><td>Top 3 do ranking da unidade</td><td><b>+500 XP</b></td></tr>
-                        <tr><td><span class="conquista-chip">🌍</span></td><td>Trilha Completa</td><td>Passar por todas as 8 matérias</td><td><b>+600 XP</b></td></tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="panel">
-                <h2>🪜 Níveis de gamificação</h2>
-                <p class="page-sub">O aluno sobe de nível conforme o XP acumulado: de Iniciante até Mestre Megamente.</p>
-                <table>
-                    <thead>
-                        <tr><th>Nível</th><th>Título</th><th>Faixa de XP</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>🌱 Iniciante</td><td>Começando a jornada</td><td>0 – 199 XP</td></tr>
-                        <tr><td>🚀 Aprendiz</td><td>Já sabe o caminho</td><td>200 – 499 XP</td></tr>
-                        <tr><td>🧭 Explorador</td><td>Explorando o mundo tech</td><td>500 – 999 XP</td></tr>
-                        <tr><td>🛠️ Criador</td><td>Criando projetos incríveis</td><td>1.000 – 1.999 XP</td></tr>
-                        <tr><td>👑 Mestre Megamente</td><td>Lenda da escola</td><td>2.000+ XP</td></tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <p class="footer-note">Protótipo estático com dados de exemplo espelhando o banco db18 (script 031 <i>view_ranking_alunos</i>).</p>
-        </main>
+    <div class="cards">
+        <div class="card">
+            <div class="card-icone">👑</div>
+            <div class="card-valor">Arthur 🏆</div>
+            <div class="card-label">Líder do ranking</div>
+        </div>
+        <div class="card">
+            <div class="card-icone">🎯</div>
+            <div class="card-valor">394</div>
+            <div class="card-label">XP médio</div>
+        </div>
+        <div class="card">
+            <div class="card-icone">⭐</div>
+            <div class="card-valor">16</div>
+            <div class="card-label">Conquistas desbloqueadas</div>
+        </div>
     </div>
 
-    <script src="assets/app.js"></script>
+    <h2>🔥 Pódio</h2>
+    <div class="podio">
+        <div class="podio-item">
+            <div>🥈</div>
+            <div class="nome">Pedro Henrique Alves</div>
+            <div>TURMA MANHÃ</div>
+            <div><b>575 XP</b></div>
+            <div><span class="badge badge-nivel">Explorador</span></div>
+        </div>
+        <div class="podio-item podio-top">
+            <div>🥇</div>
+            <div class="nome">Arthur Mendes Rocha</div>
+            <div>TURMA TARDE</div>
+            <div><b>1350 XP</b></div>
+            <div><span class="badge badge-nivel">Criador</span></div>
+        </div>
+        <div class="podio-item">
+            <div>🥉</div>
+            <div class="nome">Gabriel Teixeira Nunes</div>
+            <div>TURMA TARDE</div>
+            <div><b>500 XP</b></div>
+            <div><span class="badge badge-nivel">Explorador</span></div>
+        </div>
+    </div>
+
+    <h2>📋 Ranking completo</h2>
+    <div class="barra">
+        <input type="search" id="buscaRanking" placeholder="Buscar aluno ou turma..." oninput="filtrarRanking()">
+    </div>
+    <table>
+        <thead><tr><th>#</th><th>Aluno</th><th>Turma</th><th>Nível</th><th>XP</th><th>Conquistas</th></tr></thead>
+        <tbody id="tbodyRanking">
+            <tr><td>🥇</td><td>Arthur Mendes Rocha</td><td>TURMA TARDE</td><td>Criador</td><td><b>1350 XP</b></td><td><span class="conquista-chip">🎯</span><span class="conquista-chip">📅</span><span class="conquista-chip">🤖</span><span class="conquista-chip">🏆</span><span class="conquista-chip">🌍</span></td></tr>
+            <tr><td>🥈</td><td>Pedro Henrique Alves</td><td>TURMA MANHÃ</td><td>Explorador</td><td><b>575 XP</b></td><td><span class="conquista-chip">🎯</span><span class="conquista-chip">💻</span><span class="conquista-chip">🏆</span></td></tr>
+            <tr><td>🥉</td><td>Gabriel Teixeira Nunes</td><td>TURMA TARDE</td><td>Explorador</td><td><b>500 XP</b></td><td><span class="conquista-chip">📅</span><span class="conquista-chip">🏆</span></td></tr>
+            <tr><td>4</td><td>Laura Ferreira Dias</td><td>TURMA TARDE</td><td>Aprendiz</td><td><b>300 XP</b></td><td><span class="conquista-chip">🎯</span><span class="conquista-chip">💻</span></td></tr>
+            <tr><td>5</td><td>Sofia Lima Castro</td><td>TURMA MANHÃ</td><td>Aprendiz</td><td><b>250 XP</b></td><td><span class="conquista-chip">🎯</span><span class="conquista-chip">📅</span></td></tr>
+            <tr><td>6</td><td>Davi Sousa Pinto</td><td>TURMA NOITE</td><td>Iniciante</td><td><b>100 XP</b></td><td><span class="conquista-chip">🎯</span></td></tr>
+            <tr><td>7</td><td>Manuela Cardoso Reis</td><td>TURMA NOITE</td><td>Iniciante</td><td><b>75 XP</b></td><td><span class="conquista-chip">🎯</span></td></tr>
+            <tr><td>8</td><td>Valentina Azevedo Gomes</td><td>TURMA NOITE</td><td>Iniciante</td><td><b>0 XP</b></td><td>—</td></tr>
+        </tbody>
+    </table>
+
+    <h2>🎖️ Catálogo de conquistas</h2>
+    <table>
+        <thead><tr><th></th><th>Conquista</th><th>Condição</th><th>Pontos</th></tr></thead>
+        <tbody>
+            <tr><td>🎯</td><td>Primeira Presença</td><td>Ter a 1ª presença registrada</td><td><b>+50 XP</b></td></tr>
+            <tr><td>📅</td><td>Frequência Perfeita</td><td>Não faltar nenhuma aula no mês</td><td><b>+150 XP</b></td></tr>
+            <tr><td>💻</td><td>Mestre em Programação</td><td>Completar a matéria Jogos 2D</td><td><b>+200 XP</b></td></tr>
+            <tr><td>🤖</td><td>Mestre em Robótica</td><td>Finalizar o módulo de Robótica</td><td><b>+200 XP</b></td></tr>
+            <tr><td>🏆</td><td>Super Criador</td><td>3 projetos com nota máxima</td><td><b>+300 XP</b></td></tr>
+            <tr><td>⭐</td><td>Estrela do Curso</td><td>Estar no top 3 do ranking</td><td><b>+500 XP</b></td></tr>
+            <tr><td>🌍</td><td>Trilha Completa</td><td>Passar por todas as 8 matérias</td><td><b>+600 XP</b></td></tr>
+        </tbody>
+    </table>
+
+    <h2>🪜 Níveis</h2>
+    <table>
+        <thead><tr><th>Nível</th><th>Título</th><th>Faixa de XP</th></tr></thead>
+        <tbody>
+            <tr><td>🌱 Iniciante</td><td>Começando a jornada</td><td>0 – 199 XP</td></tr>
+            <tr><td>🚀 Aprendiz</td><td>Já sabe o caminho</td><td>200 – 499 XP</td></tr>
+            <tr><td>🧭 Explorador</td><td>Explorando o mundo tech</td><td>500 – 999 XP</td></tr>
+            <tr><td>🛠️ Criador</td><td>Criando projetos incríveis</td><td>1.000 – 1.999 XP</td></tr>
+            <tr><td>👑 Mestre Megamente</td><td>Lenda da escola</td><td>2.000+ XP</td></tr>
+        </tbody>
+    </table>
+
+    <p class="rodape">Protótipo com dados de exemplo, espelhando o banco (view_ranking_alunos).</p>
+
+</div>
+
+<script src="assets/app.js"></script>
 </body>
 </html>

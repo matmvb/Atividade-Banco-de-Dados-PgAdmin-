@@ -2,100 +2,104 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Principal - Escola Megamente</title>
     <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
-    <div class="app">
-        <aside class="sidebar">
-            <div class="brand">🧠 Megamente <span style="font-size:11px;color:#94a3b8">PVH</span></div>
-            <nav>
-                <a href="index.html" class="active">📊 Principal</a>
-                <a href="pessoas.html">👥 Pessoas</a>
-                <a href="gamificacao.html">🏆 Gamificação</a>
-            </nav>
-            <div class="sidebar-user">
-                <b id="nomeUsuario">—</b>
-                <span id="cargoUsuario">—</span><br><br>
-                <a href="#" onclick="sair()">↩ Sair</a>
-            </div>
-        </aside>
 
-        <main class="main">
-            <h1>Painel da Unidade <span style="font-size:14px;color:#94a3b8">Porto Velho/RO</span></h1>
-            <p class="page-sub">Visão geral da escola Megamente.</p>
+<div class="menu">
+    <a href="index.html" class="ativo">📊 Principal</a>
+    <a href="pessoas.html">👥 Pessoas</a>
+    <a href="gamificacao.html">🏆 Gamificação</a>
+    <span class="usuario" id="usuarioLogado"></span>
+    <span class="usuario"><a href="#" onclick="sair()">Sair</a></span>
+</div>
 
-            <div class="cards">
-                <div class="card"><div class="card-icone">🏫</div><div class="card-valor">1</div><div class="card-label">Unidade · Porto Velho</div></div>
-                <div class="card"><div class="card-icone">🧑‍🎓</div><div class="card-valor" id="totalAlunos">8</div><div class="card-label">Alunos</div></div>
-                <div class="card"><div class="card-icone">📚</div><div class="card-valor">3</div><div class="card-label">Turmas</div></div>
-                <div class="card"><div class="card-icone">📖</div><div class="card-valor">8</div><div class="card-label">Matérias do curso</div></div>
-                <div class="card"><div class="card-icone">💰</div><div class="card-valor" id="totalPendentes">5</div><div class="card-label">Mensalidades em aberto</div></div>
-            </div>
+<div class="container">
 
-            <div class="panel">
-                <h2>📌 Top 3 do ranking (gamificação)</h2>
-                <table>
-                    <thead>
-                        <tr><th>#</th><th>Aluno</th><th>Turma</th><th>Nível</th><th>XP</th></tr>
-                    </thead>
-                    <tbody id="tbodyRankingTop">
-                        <tr><td>🥇</td><td>Arthur Mendes Rocha</td><td>TURMA TARDE</td><td><span class="badge badge-nivel" style="color:#9c27b0">Criador</span></td><td><b>1350 XP</b></td></tr>
-                        <tr><td>🥈</td><td>Pedro Henrique Alves</td><td>TURMA MANHÃ</td><td><span class="badge badge-nivel" style="color:#ff9800">Explorador</span></td><td><b>575 XP</b></td></tr>
-                        <tr><td>🥉</td><td>Gabriel Teixeira Nunes</td><td>TURMA TARDE</td><td><span class="badge badge-nivel" style="color:#ff9800">Explorador</span></td><td><b>500 XP</b></td></tr>
-                    </tbody>
-                </table>
-            </div>
+    <h1>Painel da Unidade Porto Velho/RO</h1>
+    <p class="subtitulo">Visão geral da escola Megamente.</p>
 
-            <div class="panel">
-                <h2>🗓️ Turmas</h2>
-                <table>
-                    <thead>
-                        <tr><th>Código</th><th>Turma</th><th>Turno</th><th>Horário</th><th>Vagas</th></tr>
-                    </thead>
-                    <tbody id="tbodyTurmas">
-                        <tr><td>PV-MAN-01</td><td>TURMA MANHÃ</td><td>Manhã</td><td>08:00 – 12:00</td><td>15 vagas</td></tr>
-                        <tr><td>PV-TAR-01</td><td>TURMA TARDE</td><td>Tarde</td><td>13:30 – 17:30</td><td>15 vagas</td></tr>
-                        <tr><td>PV-NOI-01</td><td>TURMA NOITE</td><td>Noite</td><td>18:30 – 21:30</td><td>15 vagas</td></tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="panel">
-                <h2>💳 Mensalidades (fictícias)</h2>
-                <div class="toolbar">
-                    <select id="filtroStatus" onchange="filtrarPagamentos()" style="padding:10px 14px;border:1px solid var(--border);border-radius:8px;font-size:14px;background:#f8fafc;">
-                        <option value="">Todos os status</option>
-                        <option value="PAGO">Pago</option>
-                        <option value="PENDENTE">Pendente</option>
-                        <option value="ATRASADO">Atrasado</option>
-                    </select>
-                </div>
-                <table>
-                    <thead>
-                        <tr><th>Aluno</th><th>Turma</th><th>Vencimento</th><th>Pagamento</th><th>Valor</th><th>Status</th></tr>
-                    </thead>
-                    <tbody id="tbodyPagamentos">
-                        <tr><td>Pedro</td><td>MANHÃ</td><td>05/07/2026</td><td>03/07/2026</td><td>R$ 350,00</td><td><span class="badge badge-pago">PAGO</span></td></tr>
-                        <tr><td>Pedro</td><td>MANHÃ</td><td>05/08/2026</td><td>04/08/2026</td><td>R$ 350,00</td><td><span class="badge badge-pago">PAGO</span></td></tr>
-                        <tr><td>Pedro</td><td>MANHÃ</td><td>05/09/2026</td><td>—</td><td>R$ 350,00</td><td><span class="badge badge-pendente">PENDENTE</span></td></tr>
-                        <tr><td>Sofia</td><td>MANHÃ</td><td>05/07/2026</td><td>06/07/2026</td><td>R$ 350,00</td><td><span class="badge badge-pago">PAGO</span></td></tr>
-                        <tr><td>Sofia</td><td>MANHÃ</td><td>05/08/2026</td><td>05/08/2026</td><td>R$ 350,00</td><td><span class="badge badge-pago">PAGO</span></td></tr>
-                        <tr><td>Arthur</td><td>TARDE</td><td>05/07/2026</td><td>02/07/2026</td><td>R$ 300,00</td><td><span class="badge badge-pago">PAGO</span></td></tr>
-                        <tr><td>Arthur</td><td>TARDE</td><td>05/08/2026</td><td>—</td><td>R$ 300,00</td><td><span class="badge badge-pendente">PENDENTE</span></td></tr>
-                        <tr><td>Laura</td><td>TARDE</td><td>05/08/2026</td><td>—</td><td>R$ 350,00</td><td><span class="badge badge-atrasado">ATRASADO</span></td></tr>
-                        <tr><td>Gabriel</td><td>TARDE</td><td>05/07/2026</td><td>10/07/2026</td><td>R$ 350,00</td><td><span class="badge badge-pago">PAGO</span></td></tr>
-                        <tr><td>Gabriel</td><td>TARDE</td><td>05/08/2026</td><td>02/08/2026</td><td>R$ 350,00</td><td><span class="badge badge-pago">PAGO</span></td></tr>
-                        <tr><td>Manuela</td><td>NOITE</td><td>05/07/2026</td><td>—</td><td>R$ 350,00</td><td><span class="badge badge-atrasado">ATRASADO</span></td></tr>
-                        <tr><td>Manuela</td><td>NOITE</td><td>05/08/2026</td><td>06/08/2026</td><td>R$ 350,00</td><td><span class="badge badge-pago">PAGO</span></td></tr>
-                        <tr><td>Davi</td><td>NOITE</td><td>05/08/2026</td><td>—</td><td>R$ 350,00</td><td><span class="badge badge-pendente">PENDENTE</span></td></tr>
-                    </tbody>
-                </table>
-            </div>
-        </main>
+    <div class="cards">
+        <div class="card">
+            <div class="card-icone">🏫</div>
+            <div class="card-valor">1</div>
+            <div class="card-label">Unidade</div>
+        </div>
+        <div class="card">
+            <div class="card-icone">🧑‍🎓</div>
+            <div class="card-valor">8</div>
+            <div class="card-label">Alunos</div>
+        </div>
+        <div class="card">
+            <div class="card-icone">📚</div>
+            <div class="card-valor">3</div>
+            <div class="card-label">Turmas</div>
+        </div>
+        <div class="card">
+            <div class="card-icone">📖</div>
+            <div class="card-valor">8</div>
+            <div class="card-label">Matérias</div>
+        </div>
+        <div class="card">
+            <div class="card-icone">💰</div>
+            <div class="card-valor">5</div>
+            <div class="card-label">Mensalidades em aberto</div>
+        </div>
     </div>
 
-    <script src="assets/app.js"></script>
+    <h2>📌 Top 3 do ranking (gamificação)</h2>
+    <table>
+        <thead><tr><th>#</th><th>Aluno</th><th>Turma</th><th>Nível</th><th>XP</th></tr></thead>
+        <tbody>
+            <tr><td>🥇</td><td>Arthur Mendes Rocha</td><td>TURMA TARDE</td><td>Criador</td><td><b>1350 XP</b></td></tr>
+            <tr><td>🥈</td><td>Pedro Henrique Alves</td><td>TURMA MANHÃ</td><td>Explorador</td><td><b>575 XP</b></td></tr>
+            <tr><td>🥉</td><td>Gabriel Teixeira Nunes</td><td>TURMA TARDE</td><td>Explorador</td><td><b>500 XP</b></td></tr>
+        </tbody>
+    </table>
+
+    <h2>🗓️ Turmas</h2>
+    <table>
+        <thead><tr><th>Código</th><th>Turma</th><th>Turno</th><th>Horário</th></tr></thead>
+        <tbody>
+            <tr><td>PV-MAN-01</td><td>TURMA MANHÃ</td><td>Manhã</td><td>08:00 – 12:00</td></tr>
+            <tr><td>PV-TAR-01</td><td>TURMA TARDE</td><td>Tarde</td><td>13:30 – 17:30</td></tr>
+            <tr><td>PV-NOI-01</td><td>TURMA NOITE</td><td>Noite</td><td>18:30 – 21:30</td></tr>
+        </tbody>
+    </table>
+
+    <h2>💳 Mensalidades</h2>
+    <div class="barra">
+        <select id="filtroStatus" onchange="filtrarPagamentos()">
+            <option value="">Todos os status</option>
+            <option value="PAGO">Pago</option>
+            <option value="PENDENTE">Pendente</option>
+            <option value="ATRASADO">Atrasado</option>
+        </select>
+    </div>
+    <table>
+        <thead><tr><th>Aluno</th><th>Vencimento</th><th>Pagamento</th><th>Valor</th><th>Status</th></tr></thead>
+        <tbody id="tbodyPagamentos">
+            <tr data-status="PAGO"><td>Pedro Henrique Alves</td><td>05/07/2026</td><td>03/07/2026</td><td>R$ 350,00</td><td><span class="badge badge-pago">PAGO</span></td></tr>
+            <tr data-status="PAGO"><td>Pedro Henrique Alves</td><td>05/08/2026</td><td>04/08/2026</td><td>R$ 350,00</td><td><span class="badge badge-pago">PAGO</span></td></tr>
+            <tr data-status="PENDENTE"><td>Pedro Henrique Alves</td><td>05/09/2026</td><td>—</td><td>R$ 350,00</td><td><span class="badge badge-pendente">PENDENTE</span></td></tr>
+            <tr data-status="PAGO"><td>Sofia Lima Castro</td><td>05/07/2026</td><td>06/07/2026</td><td>R$ 350,00</td><td><span class="badge badge-pago">PAGO</span></td></tr>
+            <tr data-status="PAGO"><td>Sofia Lima Castro</td><td>05/08/2026</td><td>05/08/2026</td><td>R$ 350,00</td><td><span class="badge badge-pago">PAGO</span></td></tr>
+            <tr data-status="PAGO"><td>Arthur Mendes Rocha</td><td>05/07/2026</td><td>02/07/2026</td><td>R$ 300,00</td><td><span class="badge badge-pago">PAGO</span></td></tr>
+            <tr data-status="PENDENTE"><td>Arthur Mendes Rocha</td><td>05/08/2026</td><td>—</td><td>R$ 300,00</td><td><span class="badge badge-pendente">PENDENTE</span></td></tr>
+            <tr data-status="ATRASADO"><td>Laura Ferreira Dias</td><td>05/08/2026</td><td>—</td><td>R$ 350,00</td><td><span class="badge badge-atrasado">ATRASADO</span></td></tr>
+            <tr data-status="PAGO"><td>Gabriel Teixeira Nunes</td><td>05/07/2026</td><td>10/07/2026</td><td>R$ 350,00</td><td><span class="badge badge-pago">PAGO</span></td></tr>
+            <tr data-status="PAGO"><td>Gabriel Teixeira Nunes</td><td>05/08/2026</td><td>02/08/2026</td><td>R$ 350,00</td><td><span class="badge badge-pago">PAGO</span></td></tr>
+            <tr data-status="ATRASADO"><td>Manuela Cardoso Reis</td><td>05/07/2026</td><td>—</td><td>R$ 350,00</td><td><span class="badge badge-atrasado">ATRASADO</span></td></tr>
+            <tr data-status="PAGO"><td>Manuela Cardoso Reis</td><td>05/08/2026</td><td>06/08/2026</td><td>R$ 350,00</td><td><span class="badge badge-pago">PAGO</span></td></tr>
+            <tr data-status="PENDENTE"><td>Davi Sousa Pinto</td><td>05/08/2026</td><td>—</td><td>R$ 350,00</td><td><span class="badge badge-pendente">PENDENTE</span></td></tr>
+        </tbody>
+    </table>
+
+    <p class="rodape">Protótipo com dados de exemplo (espelha o banco db18).</p>
+
+</div>
+
+<script src="assets/app.js"></script>
 </body>
 </html>
