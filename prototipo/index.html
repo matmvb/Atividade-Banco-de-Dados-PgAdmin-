@@ -27,11 +27,11 @@
             <p class="page-sub">Visão geral da escola Megamente.</p>
 
             <div class="cards">
-                <div class="card"><div class="card-icone">🏫</div><div class="card-valor">1</div><div class="card-label">Unidade</div></div>
-                <div class="card"><div class="card-icone">🧑‍🎓</div><div class="card-valor">8</div><div class="card-label">Alunos</div></div>
+                <div class="card"><div class="card-icone">🏫</div><div class="card-valor">1</div><div class="card-label">Unidade · Porto Velho</div></div>
+                <div class="card"><div class="card-icone">🧑‍🎓</div><div class="card-valor" id="totalAlunos">8</div><div class="card-label">Alunos</div></div>
                 <div class="card"><div class="card-icone">📚</div><div class="card-valor">3</div><div class="card-label">Turmas</div></div>
-                <div class="card"><div class="card-icone">📖</div><div class="card-valor">8</div><div class="card-label">Matérias</div></div>
-                <div class="card"><div class="card-icone">💰</div><div class="card-valor">R$ 350,00</div><div class="card-label">Mensalidade</div></div>
+                <div class="card"><div class="card-icone">📖</div><div class="card-valor">8</div><div class="card-label">Matérias do curso</div></div>
+                <div class="card"><div class="card-icone">💰</div><div class="card-valor" id="totalPendentes">0</div><div class="card-label">Mensalidades em aberto</div></div>
             </div>
 
             <div class="panel">
@@ -45,10 +45,28 @@
             </div>
 
             <div class="panel">
-                <h2>💳 Mensalidades em aberto</h2>
+                <h2>🗓️ Turmas</h2>
                 <table>
                     <thead>
-                        <tr><th>Aluno</th><th>Turma</th><th>Vencimento</th><th>Valor</th><th>Status</th></tr>
+                        <tr><th>Código</th><th>Turma</th><th>Turno</th><th>Horário</th><th>Vagas</th></tr>
+                    </thead>
+                    <tbody id="tbodyTurmas"></tbody>
+                </table>
+            </div>
+
+            <div class="panel">
+                <h2>💳 Mensalidades (fictícias)</h2>
+                <div class="toolbar">
+                    <select id="filtroStatus" onchange="filtrarPagamentos()" style="padding:10px 14px;border:1px solid var(--border);border-radius:8px;font-size:14px;background:#f8fafc;">
+                        <option value="">Todos os status</option>
+                        <option value="PAGO">Pago</option>
+                        <option value="PENDENTE">Pendente</option>
+                        <option value="ATRASADO">Atrasado</option>
+                    </select>
+                </div>
+                <table>
+                    <thead>
+                        <tr><th>Aluno</th><th>Turma</th><th>Vencimento</th><th>Pagamento</th><th>Valor</th><th>Status</th></tr>
                     </thead>
                     <tbody id="tbodyPagamentos"></tbody>
                 </table>

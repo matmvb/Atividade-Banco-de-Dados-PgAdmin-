@@ -28,13 +28,20 @@
 
             <div class="toolbar">
                 <input type="search" id="buscaPessoas" placeholder="Buscar por nome ou tipo..." oninput="filtrarPessoas()">
+                <select id="filtroTipo" onchange="filtrarPessoas()" style="padding:10px 14px;border:1px solid var(--border);border-radius:8px;font-size:14px;background:#f8fafc;">
+                    <option value="">Todos os tipos</option>
+                    <option value="ALUNO">Aluno</option>
+                    <option value="RESPONSAVEL">Responsável</option>
+                    <option value="PROFESSOR">Professor</option>
+                    <option value="FUNCIONARIO">Funcionário</option>
+                </select>
                 <button class="btn btn-success">+ Novo cadastro</button>
             </div>
 
             <div class="panel">
                 <table>
                     <thead>
-                        <tr><th></th><th>Nome completo</th><th>Tipo</th><th>Cargo</th><th>Status</th></tr>
+                        <tr><th></th><th>Nome completo</th><th>Tipo</th><th>Cargo / Turma</th><th>Telefone</th><th>E-mail</th><th>Status</th></tr>
                     </thead>
                     <tbody id="tbodyPessoas"></tbody>
                 </table>
