@@ -31,7 +31,7 @@
                 <div class="card"><div class="card-icone">🧑‍🎓</div><div class="card-valor" id="totalAlunos">8</div><div class="card-label">Alunos</div></div>
                 <div class="card"><div class="card-icone">📚</div><div class="card-valor">3</div><div class="card-label">Turmas</div></div>
                 <div class="card"><div class="card-icone">📖</div><div class="card-valor">8</div><div class="card-label">Matérias do curso</div></div>
-                <div class="card"><div class="card-icone">💰</div><div class="card-valor" id="totalPendentes">0</div><div class="card-label">Mensalidades em aberto</div></div>
+                <div class="card"><div class="card-icone">💰</div><div class="card-valor" id="totalPendentes">5</div><div class="card-label">Mensalidades em aberto</div></div>
             </div>
 
             <div class="panel">
@@ -40,7 +40,11 @@
                     <thead>
                         <tr><th>#</th><th>Aluno</th><th>Turma</th><th>Nível</th><th>XP</th></tr>
                     </thead>
-                    <tbody id="tbodyRankingTop"></tbody>
+                    <tbody id="tbodyRankingTop">
+                        <tr><td>🥇</td><td>Arthur Mendes Rocha</td><td>TURMA TARDE</td><td><span class="badge badge-nivel" style="color:#9c27b0">Criador</span></td><td><b>1350 XP</b></td></tr>
+                        <tr><td>🥈</td><td>Pedro Henrique Alves</td><td>TURMA MANHÃ</td><td><span class="badge badge-nivel" style="color:#ff9800">Explorador</span></td><td><b>575 XP</b></td></tr>
+                        <tr><td>🥉</td><td>Gabriel Teixeira Nunes</td><td>TURMA TARDE</td><td><span class="badge badge-nivel" style="color:#ff9800">Explorador</span></td><td><b>500 XP</b></td></tr>
+                    </tbody>
                 </table>
             </div>
 
@@ -50,7 +54,11 @@
                     <thead>
                         <tr><th>Código</th><th>Turma</th><th>Turno</th><th>Horário</th><th>Vagas</th></tr>
                     </thead>
-                    <tbody id="tbodyTurmas"></tbody>
+                    <tbody id="tbodyTurmas">
+                        <tr><td>PV-MAN-01</td><td>TURMA MANHÃ</td><td>Manhã</td><td>08:00 – 12:00</td><td>15 vagas</td></tr>
+                        <tr><td>PV-TAR-01</td><td>TURMA TARDE</td><td>Tarde</td><td>13:30 – 17:30</td><td>15 vagas</td></tr>
+                        <tr><td>PV-NOI-01</td><td>TURMA NOITE</td><td>Noite</td><td>18:30 – 21:30</td><td>15 vagas</td></tr>
+                    </tbody>
                 </table>
             </div>
 
@@ -68,7 +76,21 @@
                     <thead>
                         <tr><th>Aluno</th><th>Turma</th><th>Vencimento</th><th>Pagamento</th><th>Valor</th><th>Status</th></tr>
                     </thead>
-                    <tbody id="tbodyPagamentos"></tbody>
+                    <tbody id="tbodyPagamentos">
+                        <tr><td>Pedro</td><td>MANHÃ</td><td>05/07/2026</td><td>03/07/2026</td><td>R$ 350,00</td><td><span class="badge badge-pago">PAGO</span></td></tr>
+                        <tr><td>Pedro</td><td>MANHÃ</td><td>05/08/2026</td><td>04/08/2026</td><td>R$ 350,00</td><td><span class="badge badge-pago">PAGO</span></td></tr>
+                        <tr><td>Pedro</td><td>MANHÃ</td><td>05/09/2026</td><td>—</td><td>R$ 350,00</td><td><span class="badge badge-pendente">PENDENTE</span></td></tr>
+                        <tr><td>Sofia</td><td>MANHÃ</td><td>05/07/2026</td><td>06/07/2026</td><td>R$ 350,00</td><td><span class="badge badge-pago">PAGO</span></td></tr>
+                        <tr><td>Sofia</td><td>MANHÃ</td><td>05/08/2026</td><td>05/08/2026</td><td>R$ 350,00</td><td><span class="badge badge-pago">PAGO</span></td></tr>
+                        <tr><td>Arthur</td><td>TARDE</td><td>05/07/2026</td><td>02/07/2026</td><td>R$ 300,00</td><td><span class="badge badge-pago">PAGO</span></td></tr>
+                        <tr><td>Arthur</td><td>TARDE</td><td>05/08/2026</td><td>—</td><td>R$ 300,00</td><td><span class="badge badge-pendente">PENDENTE</span></td></tr>
+                        <tr><td>Laura</td><td>TARDE</td><td>05/08/2026</td><td>—</td><td>R$ 350,00</td><td><span class="badge badge-atrasado">ATRASADO</span></td></tr>
+                        <tr><td>Gabriel</td><td>TARDE</td><td>05/07/2026</td><td>10/07/2026</td><td>R$ 350,00</td><td><span class="badge badge-pago">PAGO</span></td></tr>
+                        <tr><td>Gabriel</td><td>TARDE</td><td>05/08/2026</td><td>02/08/2026</td><td>R$ 350,00</td><td><span class="badge badge-pago">PAGO</span></td></tr>
+                        <tr><td>Manuela</td><td>NOITE</td><td>05/07/2026</td><td>—</td><td>R$ 350,00</td><td><span class="badge badge-atrasado">ATRASADO</span></td></tr>
+                        <tr><td>Manuela</td><td>NOITE</td><td>05/08/2026</td><td>06/08/2026</td><td>R$ 350,00</td><td><span class="badge badge-pago">PAGO</span></td></tr>
+                        <tr><td>Davi</td><td>NOITE</td><td>05/08/2026</td><td>—</td><td>R$ 350,00</td><td><span class="badge badge-pendente">PENDENTE</span></td></tr>
+                    </tbody>
                 </table>
             </div>
         </main>
