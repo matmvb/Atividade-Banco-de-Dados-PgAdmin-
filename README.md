@@ -5,9 +5,13 @@ Trabalho da disciplina de banco de dados feito com **PostgreSQL** + **PgAdmin**.
 ## Identificação do grupo
 
 - **Grupo:** G2-04
-- **Banco de dados:** db18
-- **Usuário de acesso:** aluno18
-- **Host de conexão:** core_pgafya
+- **SGBD:** PostgreSQL (via PgAdmin)
+- **Banco de dados:** `escola_megamente`
+
+> Os dados de conexão do ambiente da disciplina (host, usuário e senha) não são
+> versionados neste repositório. Para executar localmente, crie o banco conforme o
+> script `scripts/001__create_database_escola_megamente.sql` e configure sua própria
+> conexão no PgAdmin.
 
 ### Integrantes
 
